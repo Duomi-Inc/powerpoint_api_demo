@@ -522,14 +522,13 @@ def demo_generate_from_sample_data():
     with open(data_path, "r") as f:
         deck_request = json.load(f)
 
-    # Check if slide IDs have been updated
-    first_slide_id = deck_request["slides"][0]["template_slide_id"]
-    if first_slide_id.startswith("REPLACE_WITH"):
-        print("\n  WARNING: demo_data.json still has placeholder slide IDs!")
-        print("  You must:")
-        print("    1. Upload and analyze a template")
-        print("    2. Update the 'template_slide_id' values in demo_data.json")
-        print("       with actual slide IDs from your template analysis")
+    # Check if template_slide_id is provided (required for this standalone function)
+    first_slide = deck_request["slides"][0]
+    if "template_slide_id" not in first_slide or not first_slide["template_slide_id"]:
+        print("\n  WARNING: demo_data.json requires template_slide_id for each slide!")
+        print("  Either:")
+        print("    1. Add 'template_slide_id' to each slide in demo_data.json")
+        print("    2. Or use run_end_to_end_demo() which handles this automatically")
         return None
 
     # Generate the deck
