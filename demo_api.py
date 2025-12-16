@@ -304,7 +304,9 @@ def generate_single_slide(
             - content: dict with blocks array
             - slide_format: formatting options
         options: Generation options:
-            - auto_paginate_tables: bool (split large tables across slides)
+            - auto_paginate_tables: bool (split large tables across slides).
+                Note: Only supported for table-only content. For slides with
+                both table and textbox, use False for single-page optimization.
             - table_min_font_size: int (minimum font for table text)
             - allow_textbox_reposition: bool (let textboxes move for tables)
         output_path: Optional path to save the .pptx file
@@ -355,7 +357,9 @@ def generate_deck(
         2. Poll status - check progress until complete
         3. Download - get the final .pptx file
 
-    Large tables can automatically paginate across multiple slides.
+    Large tables can automatically paginate across multiple slides when
+    using table-only content. For slides with both table and textbox content,
+    set auto_paginate_tables=False to use single-page optimization instead.
     Each slide can have its own options to override deck-level settings.
 
     Args:

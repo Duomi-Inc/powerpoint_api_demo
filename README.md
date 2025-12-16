@@ -642,10 +642,12 @@ Options control how slides are generated:
 
 | Option | Type | Default | Description |
 |--------|------|---------|-------------|
-| `auto_paginate_tables` | boolean | `true` | Automatically split large tables across multiple slides |
+| `auto_paginate_tables` | boolean | `true` | Automatically split large tables across multiple slides. **Note:** Only supported for table-only content. For slides with both table and textbox content, use `false`. |
 | `allow_textbox_reposition` | boolean | `false` | Allow textboxes below tables to move down for more table space |
 | `table_min_font_size` | integer | 9 | Minimum font size for table content (6-72) |
 | `textbox_min_font_size` | integer | 8 | Minimum font size for textbox content (6-72) |
+
+**Important:** When a slide contains both a table and text content (e.g., a textbox with bullets), you must set `auto_paginate_tables: false`. The system will then use single-page optimization to fit both elements on one slide by adjusting font sizes as needed.
 
 ### Per-Slide Options
 
