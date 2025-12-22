@@ -1,0 +1,845 @@
+{
+  "slides": [
+    {
+      "slide_data": {
+        "title": "Satisfaction, mission criticality, and differentiation",
+        "content": {
+          "blocks": [
+            {
+              "type": "table",
+              "table": {
+                "table": {
+                  "rows": [
+                    {
+                      "cells": [
+                        {
+                          "value": "Company"
+                        },
+                        {
+                          "value": "NPS"
+                        },
+                        {
+                          "value": "Mission Criticality"
+                        },
+                        {
+                          "value": "Differentiation"
+                        },
+                        {
+                          "value": "ZI Renewal Outlook"
+                        }
+                      ],
+                      "is_header": true
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Algolia"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "3"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Tegus"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "Very differentiated"
+                        },
+                        {
+                          "value": "Exploring Expansion"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Miro"
+                        },
+                        {
+                          "value": "detractor"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "Not differentiated"
+                        },
+                        {
+                          "value": "Exploring Optimization"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Seismic"
+                        },
+                        {
+                          "value": "neutral"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "Not differentiated"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Fiserv"
+                        },
+                        {
+                          "value": "neutral"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "Very differentiated"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "1Password"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "Exploring Expansion"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Sumo Logic"
+                        },
+                        {
+                          "value": "neutral"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "N/A"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Docusign"
+                        },
+                        {
+                          "value": "neutral"
+                        },
+                        {
+                          "value": "3"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "Exploring Optimization"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Grammarly"
+                        },
+                        {
+                          "value": "detractor"
+                        },
+                        {
+                          "value": "3"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "Exploring Optimization"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Visa"
+                        },
+                        {
+                          "value": "detractor"
+                        },
+                        {
+                          "value": "2"
+                        },
+                        {
+                          "value": "Not differentiated"
+                        },
+                        {
+                          "value": "Exploring Optimization"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Cart.com"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "N/A"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Thrive Capital"
+                        },
+                        {
+                          "value": "detractor"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "Not differentiated"
+                        },
+                        {
+                          "value": "N/A"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Outreach"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "5"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "DBT Labs"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "Exploring Expansion"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "TalkDesk"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "5"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "Exploring Expansion"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Motorola"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "Very differentiated"
+                        },
+                        {
+                          "value": "Exploring Expansion"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Pendo.io"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "slightly differentiated"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Papaya Global"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "5"
+                        },
+                        {
+                          "value": "N/A"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Airwallex"
+                        },
+                        {
+                          "value": "detractor"
+                        },
+                        {
+                          "value": "1"
+                        },
+                        {
+                          "value": "Not differentiated"
+                        },
+                        {
+                          "value": "Exploring Optimization"
+                        }
+                      ],
+                      "is_header": false
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "HubSpot"
+                        },
+                        {
+                          "value": "promoter"
+                        },
+                        {
+                          "value": "4"
+                        },
+                        {
+                          "value": "N/A"
+                        },
+                        {
+                          "value": "No Changes Planned"
+                        }
+                      ],
+                      "is_header": false
+                    }
+                  ],
+                  "table_format": {
+                    "default": {
+                      "text": {
+                        "font_size": 9
+                      }
+                    },
+                    "header_row": {
+                      "text": {
+                        "bold": true,
+                        "font_size": 12
+                      }
+                    }
+                  },
+                  "column_configs": [
+                    {
+                      "column_index": 1,
+                      "type": "body",
+                      "is_header": false,
+                      "format_template": "nps_highlight"
+                    },
+                    {
+                      "column_index": 2,
+                      "type": "body",
+                      "is_header": false,
+                      "format_template": "criticality_highlight"
+                    },
+                    {
+                      "column_index": 3,
+                      "type": "body",
+                      "is_header": false,
+                      "format_template": "differentiation_highlight"
+                    },
+                    {
+                      "column_index": 4,
+                      "type": "body",
+                      "is_header": false,
+                      "format_template": "outlook_highlight"
+                    }
+                  ],
+                  "format_templates": {
+                    "nps_highlight": {
+                      "rules": [
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "promoter"
+                          },
+                          "cell": {
+                            "background_color": "#C6EFCE"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "neutral"
+                          },
+                          "cell": {
+                            "background_color": "#D3D3D3"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "detractor"
+                          },
+                          "cell": {
+                            "background_color": "#FF69B4"
+                          }
+                        }
+                      ]
+                    },
+                    "criticality_highlight": {
+                      "rules": [
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "1"
+                          },
+                          "text": {
+                            "color": "#FFFFFF"
+                          },
+                          "cell": {
+                            "background_color": "#228B22"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "2"
+                          },
+                          "cell": {
+                            "background_color": "#FFB6C1"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "3"
+                          },
+                          "cell": {
+                            "background_color": "#D3D3D3"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "4"
+                          },
+                          "cell": {
+                            "background_color": "#90EE90"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "equals",
+                            "value": "5"
+                          },
+                          "cell": {
+                            "background_color": "#C6EFCE"
+                          }
+                        }
+                      ]
+                    },
+                    "differentiation_highlight": {
+                      "rules": [
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "slightly differentiated"
+                          },
+                          "cell": {
+                            "background_color": "#FFB6C1"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "very differentiated"
+                          },
+                          "cell": {
+                            "background_color": "#C6EFCE"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "not differentiated"
+                          },
+                          "cell": {
+                            "background_color": "#FF69B4"
+                          }
+                        }
+                      ]
+                    },
+                    "outlook_highlight": {
+                      "rules": [
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "no changes planned"
+                          },
+                          "cell": {
+                            "background_color": "#D3D3D3"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "exploring expansion"
+                          },
+                          "cell": {
+                            "background_color": "#C6EFCE"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "exploring optimization"
+                          },
+                          "cell": {
+                            "background_color": "#FF69B4"
+                          }
+                        }
+                      ]
+                    }
+                  }
+                }
+              }
+            },
+            {
+              "type": "text",
+              "text": {
+                "header": "Commentary",
+                "bullets": [
+                  "Recommendation sentiment leans positive for enterprise enrichment/routing given strong NA coverage and integrations; caveats include EMEA data and price, with SMB/vertical teams favoring alternatives (Motorola, DBT Labs, Talkdesk vs Miro, Airwallex, Visa)",
+                  "ZoomInfo is often mission-critical where real-time enrichment, routing, and territory management underpin workflows; elsewhere it is important but replaceable, especially with dual vendors or narrow use cases (DBT Labs, Motorola, BILL vs Algolia, Fiserv, Airwallex)"
+                ]
+              }
+            }
+          ]
+        },
+        "slide_format": {
+          "title": {
+            "font_name": "Century Gothic",
+            "bold": true,
+            "font_size": 20
+          }
+        }
+      },
+      "options": {
+        "auto_paginate_tables": false,
+        "allow_textbox_reposition": true,
+        "table_min_font_size": 8,
+        "textbox_min_font_size": 12
+      }
+    },
+    {
+      "slide_data": {
+        "title": "ZI Speend Outlook: Upcoming Renewals",
+        "subtitle": "ZoomInfo (ZI) interview digest",
+        "slide_format": {
+          "title": {
+            "font_name": "Century Gothic",
+            "font_size": 20,
+            "bold": true
+          },
+          "subtitle": {
+            "font_name": "Century Gothic",
+            "font_size": 14,
+            "bold": true
+          }
+        },
+        "content": {
+          "blocks": [
+            {
+              "type": "table",
+              "table": {
+                "table": {
+                  "table_format": {
+                    "default": {
+                      "text": {
+                        "font_size": 11
+                      }
+                    },
+                    "header_row": {
+                      "text": {
+                        "font_size": 12,
+                        "bold": true
+                      }
+                    }
+                  },
+                  "format_templates": {
+                    "bullet": {
+                      "text": {
+                        "italic": false
+                      }
+                    },
+                    "quote": {
+                      "text": {
+                        "italic": true
+                      }
+                    },
+                    "date_highlight": {
+                      "rules": [
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "2025"
+                          },
+                          "cell": {
+                            "background_color": "#FF0000"
+                          }
+                        },
+                        {
+                          "condition": {
+                            "field": "value",
+                            "operator": "contains",
+                            "value": "2026"
+                          },
+                          "cell": {
+                            "background_color": "#00FF00"
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "column_configs": [
+                    {
+                      "column_index": 1,
+                      "format_template": "date_highlight"
+                    }
+                  ],
+                  "rows": [
+                    {
+                      "is_header": true,
+                      "cells": [
+                        {
+                          "value": "Company"
+                        },
+                        {
+                          "value": "ZI Renewal Date"
+                        },
+                        {
+                          "value": "ZI Renewal Outlook"
+                        },
+                        {
+                          "value": "Commentary"
+                        }
+                      ]
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "1Password"
+                        },
+                        {
+                          "value": "Q1 2025"
+                        },
+                        {
+                          "value": "Exploring Expansion"
+                        },
+                        {
+                          "value": [
+                            {
+                              "text": [
+                                "Q1 2024 renewal on a one-year term materially increased spend, taking the contract into the $100-250K range (near $200K), up from prior levels and far above the initial $10-20K deployment four years ago. They maintain annual cycles to preserve flexibility at renewal.",
+                                "The spend step-up was driven primarily by headcount and seat expansion as outbound teams scaled, with 34-50 sellers/ICs now directly using ZoomInfo; they remained focused on credit usage and did not add many ancillary modules.",
+                                "The underlying driver for expanding usage was a strategic shift from inbound to an outbound-led motion that requires reliable North American contact data, making ZoomInfo the core source to enable AE self-generation and targeted ICP/ABM work.",
+                                "Next renewal is expected in Q1 2025 with a targeted ~30% year-over-year spend increase tied to further seat growth and higher bulk data needs from ABM. In parallel, they are evaluating EMEA data options (Lusha, Cognism) while ZoomInfo has offered an EMEA dataset test run."
+                              ],
+                              "is_bullet": true,
+                              "format_template": "bullet"
+                            },
+                            {
+                              "text": "I've been using ZoomInfo primarily as the foundation for building our outbound motion; it's our core contact repository and data enrichment layer. While they've expanded into intent, ABM, and conversation intelligence, we intentionally stick to what they are best at: the North American contact base, and we use best-in-class tools like Outreach and Gong for the rest. We maintain a diversified data stack with Sales Navigator and Clearbit because I buy vendors for what they're known for, not to be the guinea pig for adjacent modules. As we shift from inbound to outbound, reliable data to identify ICPs, roles, and target accounts is the priority, and that's where ZoomInfo fits.",
+                              "is_bullet": false,
+                              "format_template": "quote"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "cells": [
+                        {
+                          "value": "Docusign"
+                        },
+                        {
+                          "value": "Q4 2026"
+                        },
+                        {
+                          "value": "Exploring Optimization"
+                        },
+                        {
+                          "value": [
+                            {
+                              "text": [
+                                "The most recent full renewal was a three-year deal in 2023 (through 2026) with an 8-10% uplift versus the 2020-2023 term; a Q2 2024 amendment added enhanced AI (advanced Copilot) without reopening the base contract. They deferred AI at renewal because Copilot was still in beta and only opted in once features matured.",
+                                "Annual spend rose from roughly $250-300K in the early 2020s to about $300K at the 2023 renewal and is now close to $500K after the Q2 2024 AI add-on, which contributed an incremental $80-100K. Current pricing is seat-based.",
+                                "Contract choices reflected a dual-vendor strategy with Apollo, which has already reduced ZoomInfo licenses by 100-200 and led them to decline discounted five-year offers in favor of three-year terms. The head of sales supported keeping both platforms for hunters, influencing continued access to ZoomInfo despite growing Apollo usage.",
+                                "They expect a significant spend reduction at the 2026 renewal--potentially below 2020 levels--driven by Copilot-led automation reducing usage and planned February layoffs shrinking seat needs. They plan to negotiate away from seat-based minimums toward a usage-based model, targeting a 15-20% cut at renewal and 8-10% reductions each subsequent year."
+                              ],
+                              "is_bullet": true,
+                              "format_template": "bullet"
+                            },
+                            {
+                              "text": "We're currently in an interesting position because we're also one of Apollo's biggest customers. We maintain both systems because certain teams are deeply anchored to ZoomInfo and our head of sales saw value in keeping multiple platforms, particularly for our hunters. While running both systems is costly, it gives us broader data coverage, lets teams compare effectiveness, and helps us reach the right prospects faster as part of a long-term transition. That said, I'm not certain either platform will be our long-term solution--we're already talking to OpenAI about a custom ChatGPT interface that could scour the internet in natural language and, in two to three years, potentially make traditional data providers unnecessary.",
+                              "is_bullet": false,
+                              "format_template": "quote"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "options": {
+        "auto_paginate_tables": true,
+        "table_min_font_size": 8
+      }
+    }
+  ],
+  "options": {
+    "auto_paginate_tables": true,
+    "table_min_font_size": 8,
+    "textbox_min_font_size": 14,
+    "show_slide_numbers": true,
+    "footer_text": "Confidential - E2E Test",
+    "footer_font_size": 6,
+    "footer_font_name": "Arial"
+  }
+}

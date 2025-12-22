@@ -6,18 +6,27 @@ This script demonstrates how to use the PowerPoint Generation API to:
 1. Upload and analyze templates
 2. Generate single slides
 3. Generate full presentation decks with multiple slides
+4. Leverage template styling inheritance (fonts inherited from template)
 
 Prerequisites:
     pip install requests
 
 Files included in this demo folder:
-    - demo_data.json: Sample deck request with tables, formatting, and conditional styling
-    - example_table_templates.pptx: Sample PowerPoint template file
-    - API_GUIDE.md: Complete API documentation
+    - demo_data.json: Sample deck request with explicit font specifications
+    - demo_data_nofont.json: Sample deck request WITHOUT fonts (inherits from template)
+    - example_table_templates.pptx: Original sample PowerPoint template
+    - example_table_templates_v2.pptx: Enhanced template with custom placeholder styling
+    - README.md: Complete API documentation
 
 Usage:
     1. Set your API_KEY and BASE_URL below
     2. Run: python demo_api.py
+
+Template Styling Inheritance:
+    When you omit font_name/font_size in your JSON data, the API will inherit
+    styling from the template's placeholders. Compare:
+    - run_end_to_end_demo(): Uses demo_data.json with explicit Arial fonts
+    - run_template_inheritance_demo(): Uses demo_data_nofont.json to inherit fonts
 """
 
 import json
@@ -32,7 +41,7 @@ import requests
 # ============================================================================
 
 # Your API key (obtain from your organization admin)
-API_KEY = "REPLACE_WITH_YOUR_API_KEY"
+API_KEY = "AIzaSyAEakUkZDyAkwwpp0QV44PZUF3emXJdcWI"
 
 # Production API base URL
 BASE_URL = "https://powerpoint-api-gateway-36twek8d.uc.gateway.dev/api/v1"
@@ -584,6 +593,70 @@ def demo_simple_slide():
     print('  generate_single_slide("YOUR_SLIDE_ID", slide_data, output_path="simple.pptx")')
 
 
+def demo_template_styling_inheritance():
+    """
+    Demo: Template Styling Inheritance.
+
+    This demonstrates the API's ability to inherit styling from templates.
+    When you omit font specifications (font_name, font_size) in your JSON data,
+    the generated slides will use the fonts defined in the PowerPoint template.
+
+    Benefits:
+        - Brand consistency without specifying fonts in every API call
+        - Simplified JSON payloads - only include data and structural formatting
+        - Easy template switching without modifying data payloads
+
+    Files used:
+        - demo_data_nofont.json: Data WITHOUT font specifications
+        - example_table_templates_v2.pptx: Template with custom styling
+
+    Compare with:
+        - demo_data.json: Data WITH explicit font specifications (Arial)
+    """
+    print("\n" + "=" * 60)
+    print("DEMO: Template Styling Inheritance")
+    print("=" * 60)
+    print("\nThis demo shows how omitting font specifications in your JSON")
+    print("allows the generated slides to inherit styling from the template.")
+    print("\nKey difference:")
+    print("  - demo_data.json: Specifies fonts explicitly (Arial)")
+    print("  - demo_data_nofont.json: No font specs -> inherits from template")
+
+    # Show comparison
+    print("\n--- demo_data.json (WITH fonts) ---")
+    print("""
+{
+  "table_format": {
+    "default": {
+      "text": {
+        "font_name": "Arial",   // <-- Explicit font
+        "font_size": 11
+      }
+    }
+  }
+}
+""")
+
+    print("--- demo_data_nofont.json (WITHOUT fonts) ---")
+    print("""
+{
+  "table_format": {
+    "header_row": {
+      "text": {
+        "bold": true           // <-- Only structural formatting
+      }
+    }
+  }
+}
+""")
+
+    print("To generate with template styling inheritance:")
+    print("  1. Upload example_table_templates_v2.pptx")
+    print("  2. Use demo_data_nofont.json for slide data")
+    print("  3. Fonts will match the template's placeholder formatting")
+    print("\nRun: run_template_inheritance_demo()")
+
+
 def demo_table_slide():
     """
     Demo: Generate a slide with a formatted table.
@@ -700,9 +773,157 @@ def demo_table_slide():
     print('  generate_single_slide("YOUR_SLIDE_ID", slide_data, output_path="table.pptx")')
 
 
+def demo_footer_and_slide_numbers():
+    """
+    Demo: Footer Text and Slide Numbers.
+
+    This demonstrates deck-level options for adding:
+        - Footer text on all slides
+        - Slide page numbers
+
+    These options are set at the deck level in the "options" object.
+    """
+    print("\n" + "=" * 60)
+    print("DEMO: Footer and Slide Numbers")
+    print("=" * 60)
+    print("\nYou can add footer text and slide numbers to all generated slides")
+    print("using deck-level options.")
+
+    print("\n--- Deck Options Example ---")
+    options_example = {
+        "options": {
+            "auto_paginate_tables": True,
+            "table_min_font_size": 9,
+            "show_slide_numbers": True,
+            "footer_text": "Confidential - Internal Use Only",
+            "footer_font_size": 8,
+            "footer_font_name": "Arial"
+        }
+    }
+    print(json.dumps(options_example, indent=2))
+
+    print("\n--- Available Footer/Slide Number Options ---")
+    print("| Option             | Type    | Default | Description")
+    print("|--------------------|---------|---------|---------------------------------")
+    print("| show_slide_numbers | boolean | false   | Display page numbers on slides")
+    print("| footer_text        | string  | null    | Footer text for all slides")
+    print("| footer_font_size   | integer | 8       | Font size for footer text")
+    print("| footer_font_name   | string  | null    | Font name (inherits from template)")
+
+    print("\n--- Usage in generate_deck() ---")
+    print("""
+result = generate_deck(
+    slides=[...],
+    options={
+        "show_slide_numbers": True,
+        "footer_text": "Q4 2024 Report - Confidential",
+        "footer_font_size": 8,
+        "footer_font_name": "Arial"
+    },
+    output_path="deck_with_footer.pptx"
+)
+""")
+    print("See demo_data_nofont.json for a complete example with these options.")
+
+
 # ============================================================================
-# END-TO-END DEMO
+# END-TO-END DEMOS
 # ============================================================================
+
+def run_template_inheritance_demo():
+    """
+    Run a demo showcasing template styling inheritance:
+    1. Upload example_table_templates_v2.pptx (with custom styling)
+    2. Generate a deck using demo_data_nofont.json (no font specs)
+    3. The output will inherit fonts from the template
+
+    This demonstrates that when you omit font_name/font_size in your JSON,
+    the generated slides use whatever fonts are defined in the template.
+    """
+    print("=" * 60)
+    print("TEMPLATE STYLING INHERITANCE DEMO")
+    print("=" * 60)
+
+    # Step 1: Upload the v2 template
+    print("\n[Step 1/4] Uploading template with custom styling...")
+    template_path = os.path.join(os.path.dirname(__file__), "example_table_templates_v2.pptx")
+
+    if not os.path.exists(template_path):
+        print(f"ERROR: Template not found: {template_path}")
+        print("Make sure example_table_templates_v2.pptx is in the demo folder.")
+        return None
+
+    upload_result = upload_template(
+        template_path,
+        metadata={
+            "category": "demo",
+            "tags": ["styling", "inheritance", "v2"],
+            "description": "Template with custom placeholder styling for inheritance demo"
+        }
+    )
+    template_id = upload_result["template_id"]
+
+    # Step 2: Analyze template
+    print("\n[Step 2/4] Analyzing template...")
+    analysis = analyze_template(template_id)
+
+    results = analysis.get("results", {})
+    slides_info = results.get("slides", [])
+    if not slides_info:
+        print("ERROR: No slides found in template analysis")
+        return None
+
+    first_slide_id = slides_info[0]["slideId"]
+    second_slide_id = slides_info[1]["slideId"] if len(slides_info) > 1 else first_slide_id
+    print(f"\n  Template slide IDs:")
+    print(f"    - Slide 0: {first_slide_id}")
+    print(f"    - Slide 1: {second_slide_id}")
+
+    # Step 3: Load demo data WITHOUT font specifications
+    print("\n[Step 3/4] Loading demo_data_nofont.json (no font specs)...")
+    data_path = os.path.join(os.path.dirname(__file__), "demo_data_nofont.json")
+
+    if not os.path.exists(data_path):
+        print(f"ERROR: Data file not found: {data_path}")
+        print("Make sure demo_data_nofont.json is in the demo folder.")
+        return None
+
+    with open(data_path, "r") as f:
+        deck_request = json.load(f)
+
+    # Assign template slides
+    if len(deck_request["slides"]) >= 2:
+        deck_request["slides"][0]["template_slide_id"] = second_slide_id
+        deck_request["slides"][1]["template_slide_id"] = first_slide_id
+    else:
+        for slide in deck_request["slides"]:
+            slide["template_slide_id"] = first_slide_id
+
+    print(f"  Prepared {len(deck_request['slides'])} slide(s)")
+    print("  Note: JSON data does NOT specify font_name or font_size")
+    print("  Fonts will be inherited from the template's placeholders")
+
+    # Step 4: Generate the deck
+    print("\n[Step 4/4] Generating presentation...")
+    output_path = os.path.join(os.path.dirname(__file__), "demo_output_inherited_styling.pptx")
+
+    result = generate_deck(
+        slides=deck_request["slides"],
+        options=deck_request.get("options"),
+        output_path=output_path
+    )
+
+    print("\n" + "=" * 60)
+    print("TEMPLATE INHERITANCE DEMO COMPLETE!")
+    print("=" * 60)
+    print(f"\nGenerated presentation: {output_path}")
+    print(f"Total pages: {result.get('total_pages_generated', 'N/A')}")
+    print(f"Status: {result.get('status', 'N/A')}")
+    print("\nOpen the file to verify fonts match the template's styling,")
+    print("not the default Arial that would be used if fonts were explicit.")
+
+    return result
+
 
 def run_end_to_end_demo():
     """
@@ -806,24 +1027,32 @@ if __name__ == "__main__":
     print(f"\nAPI Base URL: {BASE_URL}")
     print(f"API Key: {'*' * 8}...{API_KEY[-4:] if len(API_KEY) > 4 else '****'}")
     print("\nIncluded files:")
-    print("  - demo_data.json: Sample deck request with tables")
-    print("  - example_table_templates.pptx: Sample template")
-    print("  - API_GUIDE.md: Complete API documentation")
+    print("  - demo_data.json: Sample deck request with explicit fonts")
+    print("  - demo_data_nofont.json: Sample deck request WITHOUT fonts (inherits from template)")
+    print("  - example_table_templates.pptx: Original sample template")
+    print("  - example_table_templates_v2.pptx: Enhanced template with custom styling")
+    print("  - README.md: Complete API documentation")
     print("\n" + "-" * 60)
     print("Available demo functions:")
     print("-" * 60)
-    print("  demo_list_templates()       - List templates in your org")
-    print("  demo_upload_and_analyze()   - Upload & analyze the sample template")
-    print("  demo_generate_from_sample_data() - Generate deck from demo_data.json")
-    print("  demo_simple_slide()         - Show simple slide data structure")
-    print("  demo_table_slide()          - Show table slide with formatting")
+    print("  demo_list_templates()           - List templates in your org")
+    print("  demo_upload_and_analyze()       - Upload & analyze the sample template")
+    print("  demo_generate_from_sample_data()- Generate deck from demo_data.json")
+    print("  demo_simple_slide()             - Show simple slide data structure")
+    print("  demo_table_slide()              - Show table slide with formatting")
+    print("  demo_template_styling_inheritance() - Explain template styling inheritance")
+    print("  demo_footer_and_slide_numbers() - Show footer & page number options")
+    print("-" * 60)
+    print("End-to-end demos:")
+    print("-" * 60)
+    print("  run_end_to_end_demo()           - Full demo with explicit fonts")
+    print("  run_template_inheritance_demo() - Full demo with inherited styling")
     print("-" * 60)
     print("\nQuickstart:")
     print("  1. Update API_KEY and BASE_URL at the top of this file")
-    print("  2. Run: demo_upload_and_analyze()")
-    print("  3. Copy the slide_id values to demo_data.json")
-    print("  4. Run: demo_generate_from_sample_data()")
+    print("  2. Run: run_end_to_end_demo()  OR  run_template_inheritance_demo()")
     print()
 
     # Run the end-to-end demo
     run_end_to_end_demo()
+    run_template_inheritance_demo()

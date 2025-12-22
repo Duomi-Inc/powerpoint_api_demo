@@ -18,6 +18,8 @@ This guide provides comprehensive documentation for using the PowerPoint Generat
 - [Generation Options](#generation-options)
 - [Error Handling](#error-handling)
 - [Complete Examples](#complete-examples)
+- [Template Styling Inheritance](#template-styling-inheritance)
+- [Best Practices](#best-practices)
 
 ---
 
@@ -635,7 +637,11 @@ Options control how slides are generated:
     "auto_paginate_tables": true,
     "allow_textbox_reposition": false,
     "table_min_font_size": 9,
-    "textbox_min_font_size": 8
+    "textbox_min_font_size": 8,
+    "show_slide_numbers": true,
+    "footer_text": "Confidential",
+    "footer_font_size": 8,
+    "footer_font_name": "Arial"
   }
 }
 ```
@@ -646,6 +652,10 @@ Options control how slides are generated:
 | `allow_textbox_reposition` | boolean | `false` | Allow textboxes below tables to move down for more table space |
 | `table_min_font_size` | integer | 9 | Minimum font size for table content (6-72) |
 | `textbox_min_font_size` | integer | 8 | Minimum font size for textbox content (6-72) |
+| `show_slide_numbers` | boolean | `false` | Display slide page numbers on generated slides |
+| `footer_text` | string | `null` | Footer text to display on all slides |
+| `footer_font_size` | integer | 8 | Font size for footer text |
+| `footer_font_name` | string | `null` | Font name for footer (inherits from template if not specified) |
 
 **Important:** When a slide contains both a table and text content (e.g., a textbox with bullets), you must set `auto_paginate_tables: false`. The system will then use single-page optimization to fit both elements on one slide by adjusting font sizes as needed.
 
@@ -1003,6 +1013,77 @@ Some slides may succeed while others fail:
 
 ---
 
+## Template Styling Inheritance
+
+The API supports **automatic styling inheritance** from your PowerPoint template. When you omit font properties in your JSON data, the generated slides will inherit styling (font name, font size, colors, etc.) directly from the template's placeholder formatting.
+
+### How It Works
+
+When generating slides:
+1. **Explicit styles in JSON take precedence** - If you specify `font_name`, `font_size`, etc., those values are used
+2. **Omitted styles inherit from template** - If you don't specify a style property, the template's placeholder formatting is preserved
+
+### Benefits
+
+- **Brand consistency** - Use your corporate templates and maintain their styling without re-specifying fonts in every API call
+- **Simplified JSON payloads** - Only include the data and structural formatting (bold, colors, conditional rules)
+- **Easy template switching** - Change templates without modifying your data payloads
+
+### Example: With vs Without Font Specifications
+
+**With explicit fonts (overrides template):**
+```json
+{
+  "table_format": {
+    "default": {
+      "text": {
+        "font_name": "Arial",
+        "font_size": 11
+      }
+    },
+    "header_row": {
+      "text": {
+        "font_name": "Arial",
+        "bold": true,
+        "font_size": 12
+      }
+    }
+  }
+}
+```
+
+**Without fonts (inherits from template):**
+```json
+{
+  "table_format": {
+    "header_row": {
+      "text": {
+        "bold": true
+      }
+    }
+  }
+}
+```
+
+In the second example, `font_name` and `font_size` are inherited from whatever is defined in the PowerPoint template's table placeholder.
+
+### Demo Files
+
+This demo includes files to illustrate template styling inheritance:
+
+| File | Description |
+|------|-------------|
+| `demo_data.json` | Standard demo with explicit font specifications |
+| `demo_data_nofont.json` | Same content but **without font specs** - inherits template styling |
+| `example_table_templates.pptx` | Original template |
+| `example_table_templates_v2.pptx` | Enhanced template with custom placeholder styling |
+
+To see the difference:
+1. Generate a deck using `demo_data.json` - fonts are explicitly set to Arial
+2. Generate a deck using `demo_data_nofont.json` with `example_table_templates_v2.pptx` - fonts inherit from template
+
+---
+
 ## Best Practices
 
 1. **Analyze templates first** - Always analyze templates to discover available `slide_id` values before generating
@@ -1018,3 +1099,5 @@ Some slides may succeed while others fail:
 6. **Use format templates** - Define reusable `format_templates` for consistent styling across tables
 
 7. **Match content to templates** - Ensure your content structure matches what the template slide expects (title placeholders, body placeholders, table placeholders, etc.)
+
+8. **Leverage template styling inheritance** - For brand consistency, omit font specifications in your JSON and let the template define the look and feel
