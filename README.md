@@ -14,6 +14,7 @@ This guide provides comprehensive documentation for using the PowerPoint Generat
   - [Basic Structure](#basic-structure)
   - [Content Blocks](#content-blocks)
   - [Tables](#tables)
+  - [Logo Cells](#logo-cells)
   - [Text Formatting](#text-formatting)
 - [Generation Options](#generation-options)
 - [Error Handling](#error-handling)
@@ -580,6 +581,120 @@ Configure column-level settings:
 }
 ```
 
+### Logo Cells
+
+Table cells can display company logos automatically fetched from domain names. This is useful for creating expert networks, customer lists, or partner directories with visual branding.
+
+#### Basic Usage
+
+Set `is_logo: true` on a cell and provide a domain name as the value:
+
+```json
+{
+  "cells": [
+    {"value": "stripe.com", "is_logo": true},
+    {"value": "John Smith"},
+    {"value": "Partner"}
+  ]
+}
+```
+
+The API will automatically fetch the company logo from the domain and display it in the cell.
+
+#### Logo Cell Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `value` | string | Domain name (e.g., "stripe.com", "github.com") |
+| `is_logo` | boolean | Set to `true` to fetch and display logo |
+
+#### Text Fallback
+
+For anonymized entries or when you don't want to show a logo, set `is_logo: false`:
+
+```json
+{
+  "cells": [
+    {"value": "Big Tech #1", "is_logo": false},
+    {"value": "Anonymous Expert"},
+    {"value": "Partner"}
+  ]
+}
+```
+
+#### Complete Logo Table Example
+
+```json
+{
+  "type": "table",
+  "table": {
+    "table": {
+      "table_format": {
+        "default": {"text": {"font_size": 11}},
+        "header_row": {"text": {"bold": true, "font_size": 12}}
+      },
+      "format_templates": {
+        "expert_name": {"text": {"bold": true}},
+        "expert_title": {"text": {"italic": false}}
+      },
+      "rows": [
+        {
+          "is_header": true,
+          "cells": [
+            {"value": "Company"},
+            {"value": "Expert"},
+            {"value": "Relevancy"}
+          ]
+        },
+        {
+          "cells": [
+            {"value": "stripe.com", "is_logo": true},
+            {
+              "value": [
+                {"text": "Sarah Chen", "format_template": "expert_name"},
+                {"text": "VP of Revenue Operations", "format_template": "expert_title"}
+              ]
+            },
+            {"value": "Partner"}
+          ]
+        },
+        {
+          "cells": [
+            {"value": "github.com", "is_logo": true},
+            {
+              "value": [
+                {"text": "Michael Rodriguez", "format_template": "expert_name"},
+                {"text": "Director of Sales", "format_template": "expert_title"}
+              ]
+            },
+            {"value": "Partner + Advertiser"}
+          ]
+        },
+        {
+          "cells": [
+            {"value": "Enterprise Tech #1", "is_logo": false},
+            {
+              "value": [
+                {"text": "David Kim", "format_template": "expert_name"},
+                {"text": "Senior Manager", "format_template": "expert_title"}
+              ]
+            },
+            {"value": "Partner"}
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Supported Domains
+
+The logo fetcher supports most company domains. The domain should be:
+- A valid domain name (e.g., "stripe.com", "notion.so")
+- Without protocol prefix (no "https://")
+- The company's primary domain for best logo resolution
+
 ### Text Formatting
 
 #### TextFormat Object
@@ -913,7 +1028,99 @@ Some slides may succeed while others fail:
 }
 ```
 
-### Example 5: Complete Deck Generation
+### Example 5: Logo Page (Expert Network)
+
+```json
+{
+  "template_slide_id": "slide_table",
+  "slide_data": {
+    "title": "Expert Network: Customer Insights",
+    "content": {
+      "blocks": [
+        {
+          "type": "table",
+          "table": {
+            "table": {
+              "table_format": {
+                "default": {"text": {"font_size": 11}},
+                "header_row": {"text": {"bold": true, "font_size": 12}}
+              },
+              "format_templates": {
+                "expert_name": {"text": {"bold": true}},
+                "expert_title": {"text": {"italic": false}}
+              },
+              "rows": [
+                {
+                  "is_header": true,
+                  "cells": [
+                    {"value": "Company"},
+                    {"value": "Expert"},
+                    {"value": "Relevancy"}
+                  ]
+                },
+                {
+                  "cells": [
+                    {"value": "stripe.com", "is_logo": true},
+                    {
+                      "value": [
+                        {"text": "Sarah Chen", "format_template": "expert_name"},
+                        {"text": "VP of Revenue Operations", "format_template": "expert_title"}
+                      ]
+                    },
+                    {"value": "Partner"}
+                  ]
+                },
+                {
+                  "cells": [
+                    {"value": "github.com", "is_logo": true},
+                    {
+                      "value": [
+                        {"text": "Michael Rodriguez", "format_template": "expert_name"},
+                        {"text": "Director of Sales Enablement", "format_template": "expert_title"}
+                      ]
+                    },
+                    {"value": "Partner + Advertiser"}
+                  ]
+                },
+                {
+                  "cells": [
+                    {"value": "notion.so", "is_logo": true},
+                    {
+                      "value": [
+                        {"text": "Emily Watson", "format_template": "expert_name"},
+                        {"text": "Head of GTM Strategy", "format_template": "expert_title"}
+                      ]
+                    },
+                    {"value": "Partner"}
+                  ]
+                },
+                {
+                  "cells": [
+                    {"value": "Big Tech #1", "is_logo": false},
+                    {
+                      "value": [
+                        {"text": "David Kim", "format_template": "expert_name"},
+                        {"text": "Senior Manager, Sales Ops", "format_template": "expert_title"}
+                      ]
+                    },
+                    {"value": "Partner + Advertiser"}
+                  ]
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  },
+  "options": {
+    "auto_paginate_tables": true,
+    "table_min_font_size": 11
+  }
+}
+```
+
+### Example 6: Complete Deck Generation
 
 ```json
 {
@@ -1069,18 +1276,16 @@ In the second example, `font_name` and `font_size` are inherited from whatever i
 
 ### Demo Files
 
-This demo includes files to illustrate template styling inheritance:
+This demo includes the following files:
 
 | File | Description |
 |------|-------------|
-| `demo_data.json` | Standard demo with explicit font specifications |
-| `demo_data_nofont.json` | Same content but **without font specs** - inherits template styling |
-| `example_table_templates.pptx` | Original template |
-| `example_table_templates_v2.pptx` | Enhanced template with custom placeholder styling |
+| `demo_data_fake.json` | Sample deck with **logo pages** (inherits fonts from template) |
+| `template_v3.pptx` | Template with 3 slide layouts (table, table+textbox, logo page) |
 
-To see the difference:
-1. Generate a deck using `demo_data.json` - fonts are explicitly set to Arial
-2. Generate a deck using `demo_data_nofont.json` with `example_table_templates_v2.pptx` - fonts inherit from template
+To run the demo:
+1. Run `python demo_api.py` to execute the end-to-end demo
+2. The generated deck will inherit fonts from the template and include logo pages
 
 ---
 

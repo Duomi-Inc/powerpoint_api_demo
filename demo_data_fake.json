@@ -1,0 +1,1330 @@
+{
+    "slides": [
+      {
+        "slide_data": {
+          "title": "Customer Health, Engagement, and Expansion Potential",
+          "content": {
+            "blocks": [
+              {
+                "type": "table",
+                "table": {
+                  "table": {
+                    "rows": [
+                      {
+                        "cells": [
+                          {
+                            "value": "Customer"
+                          },
+                          {
+                            "value": "Health Score"
+                          },
+                          {
+                            "value": "Engagement Level"
+                          },
+                          {
+                            "value": "Product Adoption"
+                          },
+                          {
+                            "value": "Expansion Potential"
+                          }
+                        ],
+                        "is_header": true
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Acme Corp"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "5"
+                          },
+                          {
+                            "value": "fully adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "TechFlow Inc"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "4"
+                          },
+                          {
+                            "value": "partially adopted"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "DataSync Ltd"
+                          },
+                          {
+                            "value": "at risk"
+                          },
+                          {
+                            "value": "2"
+                          },
+                          {
+                            "value": "minimal adoption"
+                          },
+                          {
+                            "value": "At Risk"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "CloudFirst"
+                          },
+                          {
+                            "value": "neutral"
+                          },
+                          {
+                            "value": "3"
+                          },
+                          {
+                            "value": "partially adopted"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Innovate Labs"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "5"
+                          },
+                          {
+                            "value": "fully adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "SecureNet"
+                          },
+                          {
+                            "value": "neutral"
+                          },
+                          {
+                            "value": "3"
+                          },
+                          {
+                            "value": "N/A"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "GrowthMetrics"
+                          },
+                          {
+                            "value": "at risk"
+                          },
+                          {
+                            "value": "1"
+                          },
+                          {
+                            "value": "minimal adoption"
+                          },
+                          {
+                            "value": "At Risk"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Nexus Digital"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "4"
+                          },
+                          {
+                            "value": "partially adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Velocity Systems"
+                          },
+                          {
+                            "value": "neutral"
+                          },
+                          {
+                            "value": "3"
+                          },
+                          {
+                            "value": "partially adopted"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "PrimeStack"
+                          },
+                          {
+                            "value": "at risk"
+                          },
+                          {
+                            "value": "2"
+                          },
+                          {
+                            "value": "minimal adoption"
+                          },
+                          {
+                            "value": "At Risk"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Quantum Analytics"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "5"
+                          },
+                          {
+                            "value": "fully adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "BlueWave Tech"
+                          },
+                          {
+                            "value": "neutral"
+                          },
+                          {
+                            "value": "3"
+                          },
+                          {
+                            "value": "N/A"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Apex Solutions"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "4"
+                          },
+                          {
+                            "value": "fully adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Horizon Group"
+                          },
+                          {
+                            "value": "at risk"
+                          },
+                          {
+                            "value": "2"
+                          },
+                          {
+                            "value": "minimal adoption"
+                          },
+                          {
+                            "value": "At Risk"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Summit Enterprises"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "5"
+                          },
+                          {
+                            "value": "fully adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "NorthStar Inc"
+                          },
+                          {
+                            "value": "neutral"
+                          },
+                          {
+                            "value": "3"
+                          },
+                          {
+                            "value": "partially adopted"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Elevate Partners"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "4"
+                          },
+                          {
+                            "value": "partially adopted"
+                          },
+                          {
+                            "value": "High Potential"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "CoreLogic"
+                          },
+                          {
+                            "value": "at risk"
+                          },
+                          {
+                            "value": "1"
+                          },
+                          {
+                            "value": "minimal adoption"
+                          },
+                          {
+                            "value": "At Risk"
+                          }
+                        ],
+                        "is_header": false
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Pathway Global"
+                          },
+                          {
+                            "value": "healthy"
+                          },
+                          {
+                            "value": "4"
+                          },
+                          {
+                            "value": "N/A"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          }
+                        ],
+                        "is_header": false
+                      }
+                    ],
+                    "table_format": {
+                      "default": {
+                        "text": {
+                          "font_size": 9
+                        }
+                      },
+                      "header_row": {
+                        "text": {
+                          "bold": true,
+                          "font_size": 12
+                        }
+                      }
+                    },
+                    "column_configs": [
+                      {
+                        "column_index": 1,
+                        "type": "body",
+                        "is_header": false,
+                        "format_template": "health_highlight"
+                      },
+                      {
+                        "column_index": 2,
+                        "type": "body",
+                        "is_header": false,
+                        "format_template": "engagement_highlight"
+                      },
+                      {
+                        "column_index": 3,
+                        "type": "body",
+                        "is_header": false,
+                        "format_template": "adoption_highlight"
+                      },
+                      {
+                        "column_index": 4,
+                        "type": "body",
+                        "is_header": false,
+                        "format_template": "potential_highlight"
+                      }
+                    ],
+                    "format_templates": {
+                      "health_highlight": {
+                        "rules": [
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "healthy"
+                            },
+                            "cell": {
+                              "background_color": "#C6EFCE"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "neutral"
+                            },
+                            "cell": {
+                              "background_color": "#D3D3D3"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "at risk"
+                            },
+                            "cell": {
+                              "background_color": "#FF69B4"
+                            }
+                          }
+                        ]
+                      },
+                      "engagement_highlight": {
+                        "rules": [
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "1"
+                            },
+                            "text": {
+                              "color": "#FFFFFF"
+                            },
+                            "cell": {
+                              "background_color": "#DC143C"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "2"
+                            },
+                            "cell": {
+                              "background_color": "#FFB6C1"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "3"
+                            },
+                            "cell": {
+                              "background_color": "#D3D3D3"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "4"
+                            },
+                            "cell": {
+                              "background_color": "#90EE90"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "equals",
+                              "value": "5"
+                            },
+                            "cell": {
+                              "background_color": "#C6EFCE"
+                            }
+                          }
+                        ]
+                      },
+                      "adoption_highlight": {
+                        "rules": [
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "partially adopted"
+                            },
+                            "cell": {
+                              "background_color": "#FFB6C1"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "fully adopted"
+                            },
+                            "cell": {
+                              "background_color": "#C6EFCE"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "minimal adoption"
+                            },
+                            "cell": {
+                              "background_color": "#FF69B4"
+                            }
+                          }
+                        ]
+                      },
+                      "potential_highlight": {
+                        "rules": [
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "moderate potential"
+                            },
+                            "cell": {
+                              "background_color": "#D3D3D3"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "high potential"
+                            },
+                            "cell": {
+                              "background_color": "#C6EFCE"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "at risk"
+                            },
+                            "cell": {
+                              "background_color": "#FF69B4"
+                            }
+                          }
+                        ]
+                      }
+                    }
+                  }
+                }
+              },
+              {
+                "type": "text",
+                "text": {
+                  "header": "Commentary",
+                  "bullets": [
+                    "Customer health skews positive for enterprise accounts with dedicated CSMs; concerns center on SMB segment where engagement drops below threshold after month three, particularly for accounts without technical champions (DataSync, GrowthMetrics, CoreLogic vs Acme Corp, Innovate Labs, Quantum Analytics)",
+                    "Product adoption is tightly correlated with expansion revenue; fully adopted accounts show 3.2x higher upsell conversion, while minimal adoption accounts require immediate intervention playbooks to prevent churn (Summit Enterprises, Apex Solutions vs PrimeStack, Horizon Group)"
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "options": {
+          "auto_paginate_tables": false,
+          "allow_textbox_reposition": true,
+          "table_min_font_size": 9,
+          "textbox_min_font_size": 12
+        }
+      },
+      {
+        "slide_data": {
+          "title": "Renewal Outlook: Q1-Q3 2025 Renewals",
+          "subtitle": "Customer Success Platform (CSP) customer digest",
+          "content": {
+            "blocks": [
+              {
+                "type": "table",
+                "table": {
+                  "table": {
+                    "table_format": {
+                      "default": {
+                        "text": {
+                          "font_size": 11
+                        }
+                      },
+                      "header_row": {
+                        "text": {
+                          "font_size": 12,
+                          "bold": true
+                        }
+                      }
+                    },
+                    "format_templates": {
+                      "bullet": {
+                        "text": {
+                          "italic": false
+                        }
+                      },
+                      "quote": {
+                        "text": {
+                          "italic": true
+                        }
+                      },
+                      "date_highlight": {
+                        "rules": [
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "2025"
+                            },
+                            "cell": {
+                              "background_color": "#FF0000"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "2026"
+                            },
+                            "cell": {
+                              "background_color": "#00FF00"
+                            }
+                          }
+                        ]
+                      },
+                      "potential_highlight": {
+                        "rules": [
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "moderate potential"
+                            },
+                            "cell": {
+                              "background_color": "#D3D3D3"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "high potential"
+                            },
+                            "cell": {
+                              "background_color": "#C6EFCE"
+                            }
+                          },
+                          {
+                            "condition": {
+                              "field": "value",
+                              "operator": "contains",
+                              "value": "at risk"
+                            },
+                            "cell": {
+                              "background_color": "#FF69B4"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "column_configs": [
+                      {
+                        "column_index": 1,
+                        "format_template": "date_highlight"
+                      },
+                      {
+                        "column_index": 2,
+                        "format_template": "potential_highlight"
+                      }
+                    ],
+                    "rows": [
+                      {
+                        "is_header": true,
+                        "cells": [
+                          {
+                            "value": "Customer"
+                          },
+                          {
+                            "value": "Renewal Date"
+                          },
+                          {
+                            "value": "Expansion Potential"
+                          },
+                          {
+                            "value": "Commentary"
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Acme Corp"
+                          },
+                          {
+                            "value": "Q1 2025"
+                          },
+                          {
+                            "value": "High Potential"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Q1 2024 renewal expanded contract from $85K to $145K annually, adding advanced analytics module and 50 additional seats. Current deployment spans 180 users across sales, marketing, and customer success teams.",
+                                  "Primary expansion driver was the launch of their new enterprise sales division requiring deeper pipeline analytics and forecasting capabilities. Usage metrics show 94% weekly active user rate.",
+                                  "Executive sponsor (VP Sales) is a vocal advocate, speaking at two industry conferences about ROI achieved through the platform. Internal NPS survey returned a score of 72.",
+                                  "Q1 2025 renewal expected to add AI-powered insights module ($35K incremental) and expand to product team (25 seats). Multi-year discount being discussed in exchange for case study participation."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "The platform has become our single source of truth for customer health. Before implementation, we were flying blind on churn risk--now we catch at-risk accounts 60 days earlier on average. The AI features they're previewing look game-changing for predictive modeling. We're already budgeting for expansion because the ROI math is crystal clear.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "DataSync Ltd"
+                          },
+                          {
+                            "value": "Q2 2025"
+                          },
+                          {
+                            "value": "At Risk"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Two-year contract signed Q2 2023 at $65K annually is coming up for renewal. Usage has declined 40% since executive sponsor departed in Q3 2024.",
+                                  "Original champion (Director of Customer Success) left for competitor; replacement has no prior platform experience and has been evaluating alternatives including Gainsight and ChurnZero.",
+                                  "Technical integration issues with their custom CRM have never been fully resolved, leading to data sync delays that frustrate end users. Support ticket volume is 3x average.",
+                                  "Churn risk is high unless executive alignment can be re-established. CSM team has escalated and scheduled EBR with new VP of Operations for January."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "I inherited this contract and honestly, I'm not sure it's delivering value. The team complains about data being stale and the reports not matching what they see in Salesforce. I've been talking to other vendors who seem more flexible on integrations. We'll need to see significant improvement before I can justify renewal.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Innovate Labs"
+                          },
+                          {
+                            "value": "Q2 2025"
+                          },
+                          {
+                            "value": "High Potential"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Power user account with current annual spend of $220K across three business units. Contract includes enterprise tier with custom integrations and dedicated support.",
+                                  "Platform is deeply embedded in daily workflows--CS team runs all health scoring, QBRs, and renewal playbooks through the system. Estimated switching cost is 6+ months of productivity loss.",
+                                  "Recently promoted internal champion to Chief Customer Officer, signaling strategic priority on customer success. Company is in growth mode after Series D funding.",
+                                  "Q2 2025 renewal will include discussion of multi-year enterprise agreement (3-year) with 15% expansion for new product team adoption and advanced API access."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "This platform is mission-critical infrastructure for us. Every customer touchpoint, every health signal, every renewal forecast flows through it. We've built custom workflows that would take quarters to replicate elsewhere. My focus at renewal is locking in favorable terms on a longer contract while expanding to support our growth trajectory.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "CloudFirst"
+                          },
+                          {
+                            "value": "Q3 2025"
+                          },
+                          {
+                            "value": "Moderate Potential"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Mid-market account with $45K annual spend on standard tier. Three-year contract from Q3 2022 is approaching renewal with stable but unspectacular usage patterns.",
+                                  "Customer has not adopted advanced features (AI insights, custom dashboards) despite multiple enablement sessions. Utilization hovers around 60% of licensed capacity.",
+                                  "Budget constraints from recent restructuring may impact renewal. Finance team has requested ROI documentation and competitive pricing analysis.",
+                                  "Likely flat renewal with potential modest expansion if proposed use case for product feedback loop gains internal approval. Risk of downsell if budget pressures intensify."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "We're generally satisfied with the platform but I wouldn't call it transformative for us. It does what we need for basic health tracking and renewal management. The advanced features seem powerful but we haven't had bandwidth to implement them. Renewal will depend on whether we can justify the spend given our current budget environment.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Quantum Analytics"
+                          },
+                          {
+                            "value": "Q1 2026"
+                          },
+                          {
+                            "value": "High Potential"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Strategic account with $180K annual contract, expanded twice since initial $60K deployment in 2022. Currently at 250 seats across global operations.",
+                                  "Champion network is strong with advocates in CS, Sales, and Product teams. Monthly usage reports show 89% feature adoption and 96% weekly active users.",
+                                  "Company is acquiring two smaller competitors in 2025, creating opportunity for significant seat expansion and potential displacement of acquired companies' tooling.",
+                                  "Q1 2026 renewal expected to be straightforward expansion discussion. Early conversations suggest 40-50% growth tied to M&A integration timeline."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "We've standardized on this platform globally and it's one of the few tools that survived our last tech stack rationalization. The data quality and integration capabilities are excellent. With our acquisitions coming, we're already planning to migrate the acquired companies onto our instance. This is a grow-with-us relationship.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "GrowthMetrics"
+                          },
+                          {
+                            "value": "Q1 2025"
+                          },
+                          {
+                            "value": "At Risk"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Small account ($28K annually) with declining engagement since Q2 2024. Weekly active users dropped from 85% to 35% after layoffs reduced CS team by half.",
+                                  "Company is in cost-cutting mode following missed revenue targets. All vendor contracts are under review with procurement leading aggressive negotiation rounds.",
+                                  "Competitor (Totango) has offered aggressive pricing to displacement deal. Internal champion is advocating for retention but lacks budget authority.",
+                                  "High probability of churn or significant downsell. CSM recommending proactive discount offer to preserve relationship for future expansion when company stabilizes."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "Look, I love the product but I'm fighting battles on every front right now. We cut half our CS team and every dollar is being scrutinized. I've got a competitor offering to match our functionality at 40% less. Unless you can get creative on pricing, I don't know how I defend this renewal to my CFO.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "Summit Enterprises"
+                          },
+                          {
+                            "value": "Q3 2025"
+                          },
+                          {
+                            "value": "High Potential"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Enterprise account with $310K annual contract, the largest in the SMB vertical. Deployment includes custom integrations with SAP, ServiceNow, and proprietary billing system.",
+                                  "Executive sponsor (CRO) is a board advisor reference customer. Company has provided three customer references and participated in product advisory council.",
+                                  "Recent pilot of new workflow automation features exceeded expectations, reducing manual CS tasks by 40%. Full rollout planned for Q2 2025.",
+                                  "Q3 2025 renewal expected to include significant expansion (est. $75-100K) for automation module enterprise license plus international team onboarding."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "This vendor is a true strategic partner for us. They've invested in understanding our business and the product roadmap aligns with where we're headed. The automation pilot was eye-opening--my team is already asking when they can get full access. Renewal isn't a question; the conversation is purely about how much we're expanding.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {
+                            "value": "PrimeStack"
+                          },
+                          {
+                            "value": "Q2 2025"
+                          },
+                          {
+                            "value": "At Risk"
+                          },
+                          {
+                            "value": [
+                              {
+                                "text": [
+                                  "Mid-market account with $52K annual spend. Original use case (churn prediction) has not delivered expected results due to data quality issues on customer side.",
+                                  "Implementation was rushed and proper data hygiene protocols were never established. Customer blames platform for inaccurate predictions stemming from garbage-in data.",
+                                  "New CTO hired in Q4 2024 is conducting full vendor audit. Has expressed preference for building internal solutions vs. buying SaaS tools.",
+                                  "Significant churn risk unless professional services engagement can remediate data issues and demonstrate value. Proposal for health check engagement submitted."
+                                ],
+                                "is_bullet": true,
+                                "format_template": "bullet"
+                              },
+                              {
+                                "text": "The predictions have been unreliable and it's eroded trust in the platform. I know part of that is our data quality, but we expected more guidance during implementation. Our new CTO is skeptical of SaaS vendors generally and is pushing for in-house alternatives. You'll need to show me a clear remediation path or this renewal is in serious jeopardy.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "options": {
+          "auto_paginate_tables": true,
+          "table_min_font_size": 11
+        }
+      },
+      {
+        "slide_data": {
+          "title": "Customer Advisory Board: Key Account Contacts",
+          "content": {
+            "blocks": [
+              {
+                "type": "table",
+                "table": {
+                  "table": {
+                    "rows": [
+                      {
+                        "is_header": true,
+                        "cells": [
+                          {"value": "Company"},
+                          {"value": "Contact"},
+                          {"value": "Engagement Type"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "salesforce.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Marcus Johnson", "format_template": "expert_name"},
+                              {"text": "SVP of Customer Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "twilio.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Priya Sharma", "format_template": "expert_name"},
+                              {"text": "VP of Revenue Operations", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "shopify.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "James Chen", "format_template": "expert_name"},
+                              {"text": "Director of Merchant Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "Enterprise Tech #1", "is_logo": false},
+                          {
+                            "value": [
+                              {"text": "Katherine Williams", "format_template": "expert_name"},
+                              {"text": "Chief Customer Officer", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "atlassian.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "David Park", "format_template": "expert_name"},
+                              {"text": "Head of Customer Programs", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "zendesk.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Maria Rodriguez", "format_template": "expert_name"},
+                              {"text": "VP of Customer Experience", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "intercom.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Thomas O'Brien", "format_template": "expert_name"},
+                              {"text": "Director of Success Operations", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "datadog.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Lisa Nakamura", "format_template": "expert_name"},
+                              {"text": "SVP of Global Customer Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "okta.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Robert Singh", "format_template": "expert_name"},
+                              {"text": "VP of Enterprise Accounts", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "mongodb.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Jennifer Liu", "format_template": "expert_name"},
+                              {"text": "Head of Customer Retention", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "snowflake.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Andrew Mitchell", "format_template": "expert_name"},
+                              {"text": "VP of Customer Growth", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "asana.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Sarah Thompson", "format_template": "expert_name"},
+                              {"text": "Director of Customer Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "figma.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Michael Chang", "format_template": "expert_name"},
+                              {"text": "Head of Enterprise Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "Financial Services #1", "is_logo": false},
+                          {
+                            "value": [
+                              {"text": "Elizabeth Warren", "format_template": "expert_name"},
+                              {"text": "SVP of Client Relations", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "stripe.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Ryan Patel", "format_template": "expert_name"},
+                              {"text": "Director of Revenue Operations", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "notion.so", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Amanda Foster", "format_template": "expert_name"},
+                              {"text": "VP of Customer Experience", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "docusign.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Christopher Lee", "format_template": "expert_name"},
+                              {"text": "Head of Global CS Operations", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "cloudflare.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Nicole Martinez", "format_template": "expert_name"},
+                              {"text": "SVP of Customer Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "airtable.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Daniel Kim", "format_template": "expert_name"},
+                              {"text": "Director of Strategic Accounts", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board"}
+                        ]
+                      },
+                      {
+                        "cells": [
+                          {"value": "hubspot.com", "is_logo": true},
+                          {
+                            "value": [
+                              {"text": "Rachel Green", "format_template": "expert_name"},
+                              {"text": "VP of Partner Success", "format_template": "expert_title"}
+                            ]
+                          },
+                          {"value": "Advisory Board + Reference"}
+                        ]
+                      }
+                    ],
+                    "table_format": {
+                      "default": {
+                        "text": {
+                          "font_size": 11
+                        }
+                      },
+                      "header_row": {
+                        "text": {
+                          "bold": true,
+                          "font_size": 12
+                        }
+                      }
+                    },
+                    "format_templates": {
+                      "expert_name": {
+                        "text": {
+                          "bold": true
+                        }
+                      },
+                      "expert_title": {
+                        "text": {
+                          "bold": false,
+                          "italic": false
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            ]
+          }
+        },
+        "options": {
+          "auto_paginate_tables": true,
+          "table_min_font_size": 11
+        }
+      }
+    ],
+    "options": {
+      "auto_paginate_tables": true,
+      "table_min_font_size": 11,
+      "textbox_min_font_size": 14,
+      "show_slide_numbers": true,
+      "footer_text": "Confidential"
+    }
+  }
