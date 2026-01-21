@@ -41,8 +41,8 @@ import requests
 # CONFIGURATION - UPDATE THESE VALUES
 # ============================================================================
 
-# Your API key (obtain from your organization admin)
-API_KEY = "AIzaSyAEakUkZDyAkwwpp0QV44PZUF3emXJdcWI"
+# Your API key (contact support to obtain)
+API_KEY = "YOUR_API_KEY_HERE"
 
 # Production API base URL
 BASE_URL = "https://powerpoint-api-gateway-36twek8d.uc.gateway.dev/api/v1"
