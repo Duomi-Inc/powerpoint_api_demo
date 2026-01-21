@@ -1339,8 +1339,7 @@
                       {"name": "Not Considering", "values": [12, 4, 8]}
                     ],
                     "show_bar_labels": true,
-                    "legend": {"position": "bottom"},
-                    "value_axis_unit": "%"
+                    "legend": {"position": "bottom"}
                   }
                 }
               ]
