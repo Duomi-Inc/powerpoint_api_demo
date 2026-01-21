@@ -8,13 +8,14 @@ This script demonstrates how to use the PowerPoint Generation API to:
 3. Generate full presentation decks with multiple slides
 4. Leverage template styling inheritance (fonts inherited from template)
 5. Create logo pages with automatic company logo fetching
+6. Create chart + table two-column slides with custom colors
 
 Prerequisites:
     pip install requests
 
 Files included in this demo folder:
-    - demo_data_fake.json: Sample deck with logo pages (inherits fonts from template)
-    - template_v3.pptx: PowerPoint template with 3 slide layouts
+    - demo_data_fake.json: Sample deck with 5 slides (table, logo, chart+table)
+    - template_v3.pptx: PowerPoint template with 4 slide layouts
     - README.md: Complete API documentation
 
 Usage:
@@ -27,7 +28,11 @@ Template Styling Inheritance:
 
 Logo Pages:
     Use "is_logo": true in table cells to automatically fetch company logos
-    from domain names. See demo_logo_slide() for examples.
+    from domain names.
+
+Chart + Table Slides:
+    Use two-column content format with chart and table blocks. Supports
+    custom series colors and value_axis_unit for non-percent charts.
 """
 
 import json
