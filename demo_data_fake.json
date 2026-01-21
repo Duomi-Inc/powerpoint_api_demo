@@ -1338,7 +1338,9 @@
                       {"name": "Seen Demo / Sales Pitch", "values": [10, 6, 4]},
                       {"name": "Not Considering", "values": [12, 4, 8]}
                     ],
-                    "show_bar_labels": true
+                    "show_bar_labels": true,
+                    "legend": {"position": "bottom"},
+                    "value_axis_unit": "%"
                   }
                 }
               ]
@@ -1492,6 +1494,93 @@
         "options": {
           "auto_paginate_tables": false
         }
+      },
+      {
+        "slide_data": {
+          "title": "Quarterly Revenue by Product Line",
+          "footnote": "Source: Internal Finance Data Q4 2024",
+          "content": [
+            {
+              "header": "Revenue Breakdown ($M)",
+              "blocks": [
+                {
+                  "type": "chart",
+                  "chart": {
+                    "chart_type": "stacked_column",
+                    "categories": ["Q1", "Q2", "Q3", "Q4"],
+                    "series": [
+                      {"name": "Enterprise", "values": [12.5, 14.2, 15.8, 18.1], "color": "#2E75B6"},
+                      {"name": "Mid-Market", "values": [8.3, 9.1, 10.2, 11.5], "color": "#70AD47"},
+                      {"name": "SMB", "values": [4.2, 4.8, 5.1, 5.9], "color": "#FFC000"}
+                    ],
+                    "show_bar_labels": true,
+                    "legend": {"position": "bottom"},
+                    "value_axis_unit": "$M"
+                  }
+                }
+              ]
+            },
+            {
+              "header": "Key Highlights",
+              "blocks": [
+                {
+                  "type": "table",
+                  "table": {
+                    "table": {
+                      "rows": [
+                        {
+                          "is_header": true,
+                          "cells": [
+                            {"value": "Segment"},
+                            {"value": "YoY Growth"},
+                            {"value": "Notes"}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "Enterprise"},
+                            {"value": "+45%"},
+                            {"value": "Strong expansion in financial services"}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "Mid-Market"},
+                            {"value": "+39%"},
+                            {"value": "New partnerships driving growth"}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "SMB"},
+                            {"value": "+40%"},
+                            {"value": "Self-serve adoption accelerating"}
+                          ]
+                        }
+                      ],
+                      "table_format": {
+                        "default": {
+                          "text": {
+                            "font_size": 10
+                          }
+                        },
+                        "header_row": {
+                          "text": {
+                            "bold": true,
+                            "font_size": 11
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "auto_paginate_tables": false
+        }
       }
     ],
     "options": {
@@ -1499,6 +1588,6 @@
       "table_min_font_size": 11,
       "textbox_min_font_size": 14,
       "show_slide_numbers": true,
-      "footer_text": "Confidential - Customer Success Analysis"
+      "footer_text": "Confidential"
     }
   }
