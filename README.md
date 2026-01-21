@@ -584,7 +584,7 @@ Configure column-level settings:
 
 ### Charts
 
-Chart blocks allow you to create data visualizations. Currently supported chart types include stacked column charts.
+Chart blocks allow you to create data visualizations. Supported chart types include column and bar charts with clustered, stacked, and percent stacked variants.
 
 #### Chart Block Structure
 
@@ -592,14 +592,16 @@ Chart blocks allow you to create data visualizations. Currently supported chart 
 {
   "type": "chart",
   "chart": {
-    "chart_type": "percent_stacked_column",
-    "categories": ["Category 1", "Category 2", "Category 3"],
+    "chart_type": "stacked_column",
+    "categories": ["Q1", "Q2", "Q3", "Q4"],
     "series": [
-      {"name": "Series A", "values": [10, 20, 15]},
-      {"name": "Series B", "values": [25, 15, 30]},
-      {"name": "Series C", "values": [15, 25, 20]}
+      {"name": "Enterprise", "values": [12.5, 14.2, 15.8, 18.1], "color": "#2E75B6"},
+      {"name": "Mid-Market", "values": [8.3, 9.1, 10.2, 11.5], "color": "#70AD47"},
+      {"name": "SMB", "values": [4.2, 4.8, 5.1, 5.9], "color": "#FFC000"}
     ],
-    "show_bar_labels": true
+    "show_bar_labels": true,
+    "value_axis_unit": "$M",
+    "legend": {"position": "bottom"}
   }
 }
 ```
@@ -608,46 +610,50 @@ Chart blocks allow you to create data visualizations. Currently supported chart 
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `chart_type` | string | Chart type (e.g., "percent_stacked_column") |
+| `chart_type` | string | `clustered_column`, `stacked_column`, `percent_stacked_column`, `clustered_bar`, `stacked_bar`, `percent_stacked_bar` |
 | `categories` | array | X-axis category labels |
-| `series` | array | Data series with name and values |
+| `series` | array | Data series: `{name, values, color}`. Color is optional hex code (e.g., `"#2E75B6"`) |
 | `show_bar_labels` | boolean | Display value labels on bars |
+| `value_axis_unit` | string | Unit label displayed above Y-axis (e.g., `"$M"`, `"000s"`). **Note:** Skipped for percent stacked charts. |
+| `legend` | object | `{"position": "bottom"}` - options: `bottom`, `left`, `right`, `top`, `top_right` |
 
 #### Two-Column Chart + Table Layout
 
-For slides with a chart on one side and a table on the other, use multi-column content:
+For slides with a chart on one side and a table on the other, use multi-column content (note: `content` is an **array** for multi-column layouts):
 
 ```json
 {
   "content": [
     {
-      "header": "Chart Title",
+      "header": "Revenue Breakdown ($M)",
       "blocks": [
         {
           "type": "chart",
           "chart": {
-            "chart_type": "percent_stacked_column",
-            "categories": ["Q1", "Q2", "Q3"],
+            "chart_type": "stacked_column",
+            "categories": ["Q1", "Q2", "Q3", "Q4"],
             "series": [
-              {"name": "Product A", "values": [30, 40, 35]},
-              {"name": "Product B", "values": [70, 60, 65]}
+              {"name": "Enterprise", "values": [12.5, 14.2, 15.8, 18.1], "color": "#2E75B6"},
+              {"name": "Mid-Market", "values": [8.3, 9.1, 10.2, 11.5], "color": "#70AD47"}
             ],
-            "show_bar_labels": true
+            "show_bar_labels": true,
+            "value_axis_unit": "$M",
+            "legend": {"position": "bottom"}
           }
         }
       ]
     },
     {
-      "header": "Supporting Data",
+      "header": "Key Highlights",
       "blocks": [
         {
           "type": "table",
           "table": {
             "table": {
               "rows": [
-                {"is_header": true, "cells": [{"value": "Metric"}, {"value": "Value"}]},
-                {"cells": [{"value": "Total Revenue"}, {"value": "$1.2M"}]},
-                {"cells": [{"value": "Growth Rate"}, {"value": "+15%"}]}
+                {"is_header": true, "cells": [{"value": "Segment"}, {"value": "YoY Growth"}]},
+                {"cells": [{"value": "Enterprise"}, {"value": "+45%"}]},
+                {"cells": [{"value": "Mid-Market"}, {"value": "+39%"}]}
               ]
             }
           }
@@ -1448,14 +1454,15 @@ This demo includes the following files:
 
 | File | Description |
 |------|-------------|
-| `demo_data_fake.json` | Sample deck with 4 slides: table+text, table-only, logo page, and chart+table |
+| `demo_data_fake.json` | Sample deck with 5 slides demonstrating all features |
 | `template_v3.pptx` | Template with 4 slide layouts (table+textbox, table-only, logo page, chart+table) |
 
 **Slide layouts in the demo:**
-- **Slide 0**: Table only - simple table layout
-- **Slide 1**: Table + textbox - table with commentary bullets
+- **Slide 0**: Table + textbox - table with commentary bullets
+- **Slide 1**: Table only - simple table layout
 - **Slide 2**: Logo page - table with company logos (`is_logo: true`)
-- **Slide 3**: Chart + table - two-column layout with chart and supporting table
+- **Slide 3**: Chart + table - `percent_stacked_column` with `legend.position`
+- **Slide 4**: Chart + table - `stacked_column` with custom `color` and `value_axis_unit`
 
 To run the demo:
 1. Run `python demo_api.py` to execute the end-to-end demo
