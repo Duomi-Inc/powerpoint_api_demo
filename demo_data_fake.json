@@ -1318,6 +1318,180 @@
           "auto_paginate_tables": true,
           "table_min_font_size": 11
         }
+      },
+      {
+        "slide_data": {
+          "title": "ZoomInfo Copilot: Customer Awareness & Consideration",
+          "footnote": "Source: Customer Survey Q4 2024, n=29",
+          "content": [
+            {
+              "header": "Consideration Status by Renewal Cohort",
+              "blocks": [
+                {
+                  "type": "chart",
+                  "chart": {
+                    "chart_type": "percent_stacked_column",
+                    "categories": ["Overall", "Renewal Since Q2 2024", "Renewal Before Q2 2024"],
+                    "series": [
+                      {"name": "Current Customer", "values": [3, 2, 1]},
+                      {"name": "Evaluating", "values": [4, 2, 2]},
+                      {"name": "Seen Demo / Sales Pitch", "values": [10, 6, 4]},
+                      {"name": "Not Considering", "values": [12, 4, 8]}
+                    ],
+                    "show_bar_labels": true
+                  }
+                }
+              ]
+            },
+            {
+              "header": "Customer Feedback Highlights",
+              "blocks": [
+                {
+                  "type": "table",
+                  "table": {
+                    "table": {
+                      "rows": [
+                        {
+                          "is_header": true,
+                          "cells": [
+                            {"value": "Customer"},
+                            {"value": "Consideration / Awareness"},
+                            {"value": "Commentary"}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "Software Co.\n($3B Market Cap)"},
+                            {"value": "Not Considering"},
+                            {"value": [
+                              {
+                                "text": "I haven't really heard anything about ZoomInfo's Copilot, and honestly, our reps don't spend much time in ZoomInfo to begin with. Internally, we're already building similar AI tools that are customized to fit our needs, like pulling data from Salesforce to help with account prioritization. We also use Sales Navigator a lot, and their features like Account IQ and Lead IQ are already pretty strong. So, while I think there's a general market trend for tools like Copilot, it's not really something we're interested in.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "Software Co.\n($2B+ funding)"},
+                            {"value": "Not Considering"},
+                            {"value": [
+                              {
+                                "text": "ZoomInfo did bring up Copilot to us in the past – I think it was an email outreach from our reps, but we never took the meeting. Honestly, I mostly associate ZoomInfo with contact data—mobile numbers, email addresses—and I don't really see them as innovative in the AI space. With all the budget scrutiny we're under, I don't see us spending more on ZoomInfo when there are smaller AI companies that seem more innovative and cost-effective.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "Top 10 US Bank"},
+                            {"value": "Not Considering"},
+                            {"value": [
+                              {
+                                "text": "ZoomInfo hasn't really talked to us much about Copilot, and I haven't seen a demo yet. In my view, if a GenAI copilot is going to be useful, it needs to meet people where they already are, like in Salesforce. From what I've seen, tools like Copilot mainly organize data and make it easier to consume, which is fine, but not groundbreaking. With that said, a number of our SDRs do spend time in ZoomInfo, so I plan to demo it with our reps soon.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]}
+                          ]
+                        },
+                        {
+                          "cells": [
+                            {"value": "Food Services Co."},
+                            {"value": "Seen Demo / Sales Pitch"},
+                            {"value": [
+                              {
+                                "text": "We've had demos of ZoomInfo's Copilot, but honestly, it's hard for me to get excited about it because we already have 15 other tools that do the same thing. We're primarily using ZoomInfo for contact enrichment, and that data is already integrated into our CRM, Microsoft Dynamics. When I prompt Microsoft's Copilot, it's pulling in the same ZoomInfo data, so it feels redundant to have a separate Copilot within ZoomInfo.",
+                                "is_bullet": false,
+                                "format_template": "quote"
+                              }
+                            ]}
+                          ]
+                        }
+                      ],
+                      "table_format": {
+                        "default": {
+                          "text": {
+                            "font_size": 9
+                          }
+                        },
+                        "header_row": {
+                          "text": {
+                            "bold": true,
+                            "font_size": 10
+                          }
+                        }
+                      },
+                      "format_templates": {
+                        "quote": {
+                          "text": {
+                            "italic": true
+                          }
+                        },
+                        "consideration_highlight": {
+                          "rules": [
+                            {
+                              "condition": {
+                                "field": "value",
+                                "operator": "contains",
+                                "value": "Not Considering"
+                              },
+                              "cell": {
+                                "background_color": "#FFCDD2"
+                              }
+                            },
+                            {
+                              "condition": {
+                                "field": "value",
+                                "operator": "contains",
+                                "value": "Seen Demo"
+                              },
+                              "cell": {
+                                "background_color": "#FFF9C4"
+                              }
+                            },
+                            {
+                              "condition": {
+                                "field": "value",
+                                "operator": "contains",
+                                "value": "Evaluating"
+                              },
+                              "cell": {
+                                "background_color": "#C8E6C9"
+                              }
+                            },
+                            {
+                              "condition": {
+                                "field": "value",
+                                "operator": "contains",
+                                "value": "Current Customer"
+                              },
+                              "cell": {
+                                "background_color": "#B2DFDB"
+                              }
+                            }
+                          ]
+                        }
+                      },
+                      "column_configs": [
+                        {
+                          "column_index": 1,
+                          "format_template": "consideration_highlight"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        "options": {
+          "auto_paginate_tables": false
+        }
       }
     ],
     "options": {
@@ -1325,6 +1499,6 @@
       "table_min_font_size": 11,
       "textbox_min_font_size": 14,
       "show_slide_numbers": true,
-      "footer_text": "Confidential"
+      "footer_text": "Confidential - Customer Success Analysis"
     }
   }

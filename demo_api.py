@@ -42,7 +42,7 @@ import requests
 # ============================================================================
 
 # Your API key (obtain from your organization admin)
-API_KEY = "replace_with_your_api_key"
+API_KEY = "AIzaSyAEakUkZDyAkwwpp0QV44PZUF3emXJdcWI"
 
 # Production API base URL
 BASE_URL = "https://powerpoint-api-gateway-36twek8d.uc.gateway.dev/api/v1"
@@ -972,10 +972,12 @@ def run_template_inheritance_demo():
     first_slide_id = slides_info[0]["slideId"]
     second_slide_id = slides_info[1]["slideId"] if len(slides_info) > 1 else first_slide_id
     third_slide_id = slides_info[2]["slideId"] if len(slides_info) > 2 else first_slide_id
+    fourth_slide_id = slides_info[3]["slideId"] if len(slides_info) > 3 else first_slide_id
     print(f"\n  Template slide IDs:")
     print(f"    - Slide 0 (table only): {first_slide_id}")
     print(f"    - Slide 1 (table + textbox): {second_slide_id}")
     print(f"    - Slide 2 (logo page): {third_slide_id}")
+    print(f"    - Slide 3 (chart + table): {fourth_slide_id}")
 
     # Step 3: Load demo data WITHOUT font specifications
     print("\n[Step 3/4] Loading demo_data_fake.json (no font specs)...")
@@ -990,8 +992,21 @@ def run_template_inheritance_demo():
         deck_request = json.load(f)
 
     # Assign template slides based on content type
+    def get_all_blocks(slide_data):
+        """Get all blocks from slide, handling both dict and list content formats"""
+        content = slide_data.get("slide_data", {}).get("content", {})
+        if isinstance(content, dict):
+            return content.get("blocks", [])
+        elif isinstance(content, list):
+            all_blocks = []
+            for section in content:
+                all_blocks.extend(section.get("blocks", []))
+            return all_blocks
+        return []
+
     def has_logo_cells(slide_data):
-        blocks = slide_data.get("slide_data", {}).get("content", {}).get("blocks", [])
+        """Check if any table cell has is_logo: true"""
+        blocks = get_all_blocks(slide_data)
         for block in blocks:
             if block.get("type") == "table":
                 rows = block.get("table", {}).get("table", {}).get("rows", [])
@@ -1001,12 +1016,23 @@ def run_template_inheritance_demo():
                             return True
         return False
 
+    def has_chart_blocks(slide_data):
+        """Check if slide has chart blocks"""
+        blocks = get_all_blocks(slide_data)
+        for block in blocks:
+            if block.get("type") == "chart":
+                return True
+        return False
+
     for i, slide in enumerate(deck_request["slides"]):
-        blocks = slide.get("slide_data", {}).get("content", {}).get("blocks", [])
+        blocks = get_all_blocks(slide)
         has_text_block = any(b.get("type") == "text" for b in blocks)
         is_logo_slide = has_logo_cells(slide)
+        is_chart_slide = has_chart_blocks(slide)
 
-        if is_logo_slide:
+        if is_chart_slide:
+            slide["template_slide_id"] = fourth_slide_id
+        elif is_logo_slide:
             slide["template_slide_id"] = third_slide_id
         elif has_text_block:
             slide["template_slide_id"] = second_slide_id
@@ -1092,10 +1118,12 @@ def run_end_to_end_demo():
     first_slide_id = slides_info[0]["slideId"]  # Template slide index 0 (table only)
     second_slide_id = slides_info[1]["slideId"] if len(slides_info) > 1 else first_slide_id  # Template slide index 1 (table + textbox)
     third_slide_id = slides_info[2]["slideId"] if len(slides_info) > 2 else first_slide_id  # Template slide index 2 (logo page)
+    fourth_slide_id = slides_info[3]["slideId"] if len(slides_info) > 3 else first_slide_id  # Template slide index 3 (chart + table)
     print(f"\n  Template slide IDs:")
     print(f"    - Slide 0 (table only): {first_slide_id}")
     print(f"    - Slide 1 (table + textbox): {second_slide_id}")
     print(f"    - Slide 2 (logo page): {third_slide_id}")
+    print(f"    - Slide 3 (chart + table): {fourth_slide_id}")
 
     # Step 3: Load demo data and update slide IDs
     print("\n[Step 3/4] Preparing slide data...")
@@ -1117,9 +1145,21 @@ def run_end_to_end_demo():
     num_slides = len(deck_request["slides"])
     print(f"  Loaded {num_slides} slide(s) from demo data")
 
+    def get_all_blocks(slide_data):
+        """Get all blocks from slide, handling both dict and list content formats"""
+        content = slide_data.get("slide_data", {}).get("content", {})
+        if isinstance(content, dict):
+            return content.get("blocks", [])
+        elif isinstance(content, list):
+            all_blocks = []
+            for section in content:
+                all_blocks.extend(section.get("blocks", []))
+            return all_blocks
+        return []
+
     def has_logo_cells(slide_data):
         """Check if any table cell has is_logo: true"""
-        blocks = slide_data.get("slide_data", {}).get("content", {}).get("blocks", [])
+        blocks = get_all_blocks(slide_data)
         for block in blocks:
             if block.get("type") == "table":
                 rows = block.get("table", {}).get("table", {}).get("rows", [])
@@ -1129,12 +1169,24 @@ def run_end_to_end_demo():
                             return True
         return False
 
+    def has_chart_blocks(slide_data):
+        """Check if slide has chart blocks"""
+        blocks = get_all_blocks(slide_data)
+        for block in blocks:
+            if block.get("type") == "chart":
+                return True
+        return False
+
     for i, slide in enumerate(deck_request["slides"]):
-        blocks = slide.get("slide_data", {}).get("content", {}).get("blocks", [])
+        blocks = get_all_blocks(slide)
         has_text_block = any(b.get("type") == "text" for b in blocks)
         is_logo_slide = has_logo_cells(slide)
+        is_chart_slide = has_chart_blocks(slide)
 
-        if is_logo_slide:
+        if is_chart_slide:
+            slide["template_slide_id"] = fourth_slide_id  # Chart + table template
+            print(f"    - Slide {i} (chart + table) -> Template slide 3")
+        elif is_logo_slide:
             slide["template_slide_id"] = third_slide_id  # Logo page template
             print(f"    - Slide {i} (logo page) -> Template slide 2")
         elif has_text_block:

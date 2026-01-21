@@ -14,6 +14,7 @@ This guide provides comprehensive documentation for using the PowerPoint Generat
   - [Basic Structure](#basic-structure)
   - [Content Blocks](#content-blocks)
   - [Tables](#tables)
+  - [Charts](#charts)
   - [Logo Cells](#logo-cells)
   - [Text Formatting](#text-formatting)
 - [Generation Options](#generation-options)
@@ -581,6 +582,82 @@ Configure column-level settings:
 }
 ```
 
+### Charts
+
+Chart blocks allow you to create data visualizations. Currently supported chart types include stacked column charts.
+
+#### Chart Block Structure
+
+```json
+{
+  "type": "chart",
+  "chart": {
+    "chart_type": "percent_stacked_column",
+    "categories": ["Category 1", "Category 2", "Category 3"],
+    "series": [
+      {"name": "Series A", "values": [10, 20, 15]},
+      {"name": "Series B", "values": [25, 15, 30]},
+      {"name": "Series C", "values": [15, 25, 20]}
+    ],
+    "show_bar_labels": true
+  }
+}
+```
+
+#### Chart Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `chart_type` | string | Chart type (e.g., "percent_stacked_column") |
+| `categories` | array | X-axis category labels |
+| `series` | array | Data series with name and values |
+| `show_bar_labels` | boolean | Display value labels on bars |
+
+#### Two-Column Chart + Table Layout
+
+For slides with a chart on one side and a table on the other, use multi-column content:
+
+```json
+{
+  "content": [
+    {
+      "header": "Chart Title",
+      "blocks": [
+        {
+          "type": "chart",
+          "chart": {
+            "chart_type": "percent_stacked_column",
+            "categories": ["Q1", "Q2", "Q3"],
+            "series": [
+              {"name": "Product A", "values": [30, 40, 35]},
+              {"name": "Product B", "values": [70, 60, 65]}
+            ],
+            "show_bar_labels": true
+          }
+        }
+      ]
+    },
+    {
+      "header": "Supporting Data",
+      "blocks": [
+        {
+          "type": "table",
+          "table": {
+            "table": {
+              "rows": [
+                {"is_header": true, "cells": [{"value": "Metric"}, {"value": "Value"}]},
+                {"cells": [{"value": "Total Revenue"}, {"value": "$1.2M"}]},
+                {"cells": [{"value": "Growth Rate"}, {"value": "+15%"}]}
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}
+```
+
 ### Logo Cells
 
 Table cells can display company logos automatically fetched from domain names. This is useful for creating expert networks, customer lists, or partner directories with visual branding.
@@ -1120,7 +1197,98 @@ Some slides may succeed while others fail:
 }
 ```
 
-### Example 6: Complete Deck Generation
+### Example 6: Two-Column Chart + Table Slide
+
+```json
+{
+  "template_slide_id": "slide_chart_table",
+  "slide_data": {
+    "title": "Product Awareness & Consideration",
+    "footnote": "Source: Customer Survey Q4 2024, n=150",
+    "content": [
+      {
+        "header": "Consideration Status by Segment",
+        "blocks": [
+          {
+            "type": "chart",
+            "chart": {
+              "chart_type": "percent_stacked_column",
+              "categories": ["Enterprise", "Mid-Market", "SMB"],
+              "series": [
+                {"name": "Current Customer", "values": [15, 10, 5]},
+                {"name": "Evaluating", "values": [20, 25, 15]},
+                {"name": "Seen Demo", "values": [30, 35, 40]},
+                {"name": "Not Considering", "values": [35, 30, 40]}
+              ],
+              "show_bar_labels": true
+            }
+          }
+        ]
+      },
+      {
+        "header": "Customer Feedback Highlights",
+        "blocks": [
+          {
+            "type": "table",
+            "table": {
+              "table": {
+                "rows": [
+                  {
+                    "is_header": true,
+                    "cells": [
+                      {"value": "Segment"},
+                      {"value": "Status"},
+                      {"value": "Feedback"}
+                    ]
+                  },
+                  {
+                    "cells": [
+                      {"value": "Enterprise"},
+                      {"value": "Evaluating"},
+                      {"value": [
+                        {
+                          "text": "We're impressed with the integration capabilities and are in final stages of evaluation.",
+                          "is_bullet": false,
+                          "format_template": "quote"
+                        }
+                      ]}
+                    ]
+                  },
+                  {
+                    "cells": [
+                      {"value": "Mid-Market"},
+                      {"value": "Not Considering"},
+                      {"value": [
+                        {
+                          "text": "Budget constraints are the main blocker. We'll revisit next fiscal year.",
+                          "is_bullet": false,
+                          "format_template": "quote"
+                        }
+                      ]}
+                    ]
+                  }
+                ],
+                "table_format": {
+                  "default": {"text": {"font_size": 9}},
+                  "header_row": {"text": {"bold": true, "font_size": 10}}
+                },
+                "format_templates": {
+                  "quote": {"text": {"italic": true}}
+                }
+              }
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "options": {
+    "auto_paginate_tables": false
+  }
+}
+```
+
+### Example 7: Complete Deck Generation
 
 ```json
 {
@@ -1280,12 +1448,18 @@ This demo includes the following files:
 
 | File | Description |
 |------|-------------|
-| `demo_data_fake.json` | Sample deck with **logo pages** (inherits fonts from template) |
-| `template_v3.pptx` | Template with 3 slide layouts (table, table+textbox, logo page) |
+| `demo_data_fake.json` | Sample deck with 4 slides: table+text, table-only, logo page, and chart+table |
+| `template_v3.pptx` | Template with 4 slide layouts (table+textbox, table-only, logo page, chart+table) |
+
+**Slide layouts in the demo:**
+- **Slide 0**: Table only - simple table layout
+- **Slide 1**: Table + textbox - table with commentary bullets
+- **Slide 2**: Logo page - table with company logos (`is_logo: true`)
+- **Slide 3**: Chart + table - two-column layout with chart and supporting table
 
 To run the demo:
 1. Run `python demo_api.py` to execute the end-to-end demo
-2. The generated deck will inherit fonts from the template and include logo pages
+2. The generated deck will inherit fonts from the template and include all slide types
 
 ---
 
