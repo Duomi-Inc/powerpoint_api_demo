@@ -89,4 +89,6 @@ Your template needs a **4th slide layout** with:
 
 ## Quick Start
 
-See `demo_data_fake.json` slide 4 ("ZoomInfo Copilot") for a complete working example.
+See `demo_data_fake.json` for complete working examples:
+- **Slide 3** ("ZoomInfo Copilot") - `percent_stacked_column` with `legend.position`
+- **Slide 4** ("Quarterly Revenue") - `stacked_column` with custom `color` and `value_axis_unit`
