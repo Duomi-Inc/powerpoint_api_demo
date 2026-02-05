@@ -616,6 +616,34 @@ Chart blocks allow you to create data visualizations. Supported chart types incl
 | `show_bar_labels` | boolean | Display value labels on bars |
 | `value_axis_unit` | string | Unit label displayed above Y-axis (e.g., `"$M"`, `"000s"`). **Note:** Skipped for percent stacked charts. |
 | `legend` | object | `{"position": "bottom"}` - options: `bottom`, `left`, `right`, `top`, `top_right` |
+| `data_rows` | array | Optional data table rows displayed below the chart (array of arrays) |
+| `data_table_header_column` | boolean | If `true`, first column of data table is styled as header |
+
+#### Chart Data Tables
+
+Add a data table below your chart using `data_rows`:
+
+```json
+{
+  "type": "chart",
+  "chart": {
+    "chart_type": "stacked_bar",
+    "categories": ["Enterprise", "Mid-Market", "SMB"],
+    "series": [
+      {"name": "Promoters", "values": [45, 38, 42]},
+      {"name": "Passives", "values": [35, 40, 38]},
+      {"name": "Detractors", "values": [20, 22, 20]}
+    ],
+    "data_rows": [
+      ["n=", "156", "142", "89"],
+      ["NPS", "+22", "+11", "-51"]
+    ],
+    "data_table_header_column": true
+  }
+}
+```
+
+The first value in each row (e.g., "n=", "NPS") becomes the row label when `data_table_header_column: true`.
 
 #### Two-Column Chart + Table Layout
 
@@ -1455,14 +1483,14 @@ This demo includes the following files:
 | File | Description |
 |------|-------------|
 | `demo_data_fake.json` | Sample deck with 5 slides demonstrating all features |
-| `template_v3.pptx` | Template with 4 slide layouts (table+textbox, table-only, logo page, chart+table) |
+| `template_v3.pptx` | Template with 5 slide layouts (table+textbox, table-only, logo page, chart+table, single chart) |
 
 **Slide layouts in the demo:**
 - **Slide 0**: Table + textbox - table with commentary bullets
 - **Slide 1**: Table only - simple table layout
 - **Slide 2**: Logo page - table with company logos (`is_logo: true`)
 - **Slide 3**: Chart + table - `percent_stacked_column` with `legend.position`
-- **Slide 4**: Chart + table - `stacked_column` with custom `color` and `value_axis_unit`
+- **Slide 4**: Single chart - full-page `stacked_bar` chart with data table
 
 To run the demo:
 1. Run `python demo_api.py` to execute the end-to-end demo
