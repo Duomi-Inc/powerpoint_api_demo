@@ -1338,8 +1338,13 @@
                       {"name": "Seen Demo / Sales Pitch", "values": [10, 6, 4]},
                       {"name": "Not Considering", "values": [12, 4, 8]}
                     ],
+                    "legend": {"position": "top"},
                     "show_bar_labels": true,
-                    "legend": {"position": "bottom"}
+                    "data_rows": [
+                      ["n=", "29", "14", "15"],
+                      ["% Considering", "24%", "29%", "20%"]
+                    ],
+                    "data_table_header_column": true
                   }
                 }
               ]
@@ -1496,86 +1501,31 @@
       },
       {
         "slide_data": {
-          "title": "Quarterly Revenue by Product Line",
-          "footnote": "Source: Internal Finance Data Q4 2024",
-          "content": [
-            {
-              "header": "Revenue Breakdown ($M)",
-              "blocks": [
-                {
-                  "type": "chart",
-                  "chart": {
-                    "chart_type": "stacked_column",
-                    "categories": ["Q1", "Q2", "Q3", "Q4"],
-                    "series": [
-                      {"name": "Enterprise", "values": [12.5, 14.2, 15.8, 18.1], "color": "#2E75B6"},
-                      {"name": "Mid-Market", "values": [8.3, 9.1, 10.2, 11.5], "color": "#70AD47"},
-                      {"name": "SMB", "values": [4.2, 4.8, 5.1, 5.9], "color": "#FFC000"}
-                    ],
-                    "show_bar_labels": true,
-                    "legend": {"position": "bottom"},
-                    "value_axis_unit": "$M"
-                  }
+          "title": "Customer NPS Scores by Company",
+          "footnote": "Source: Q4 2024 Customer Satisfaction Survey",
+          "content": {
+            "blocks": [
+              {
+                "type": "chart",
+                "chart": {
+                  "chart_type": "percent_stacked_column",
+                  "categories": ["Acme Corp", "TechFlow Inc", "DataSync Ltd", "CloudFirst", "Innovate Labs", "SecureNet", "GrowthMetrics", "Nexus Digital"],
+                  "series": [
+                    {"name": "Promoters (9-10)", "values": [45, 38, 12, 28, 52, 31, 8, 42]},
+                    {"name": "Passives (7-8)", "values": [32, 35, 25, 38, 28, 42, 22, 33]},
+                    {"name": "Detractors (0-6)", "values": [23, 27, 63, 34, 20, 27, 70, 25]}
+                  ],
+                  "legend": {"position": "top"},
+                  "show_bar_labels": true,
+                  "data_rows": [
+                    ["n=", "156", "142", "89", "178", "201", "134", "67", "188"],
+                    ["NPS", "+22", "+11", "-51", "-6", "+32", "+4", "-62", "+17"]
+                  ],
+                  "data_table_header_column": true
                 }
-              ]
-            },
-            {
-              "header": "Key Highlights",
-              "blocks": [
-                {
-                  "type": "table",
-                  "table": {
-                    "table": {
-                      "rows": [
-                        {
-                          "is_header": true,
-                          "cells": [
-                            {"value": "Segment"},
-                            {"value": "YoY Growth"},
-                            {"value": "Notes"}
-                          ]
-                        },
-                        {
-                          "cells": [
-                            {"value": "Enterprise"},
-                            {"value": "+45%"},
-                            {"value": "Strong expansion in financial services"}
-                          ]
-                        },
-                        {
-                          "cells": [
-                            {"value": "Mid-Market"},
-                            {"value": "+39%"},
-                            {"value": "New partnerships driving growth"}
-                          ]
-                        },
-                        {
-                          "cells": [
-                            {"value": "SMB"},
-                            {"value": "+40%"},
-                            {"value": "Self-serve adoption accelerating"}
-                          ]
-                        }
-                      ],
-                      "table_format": {
-                        "default": {
-                          "text": {
-                            "font_size": 10
-                          }
-                        },
-                        "header_row": {
-                          "text": {
-                            "bold": true,
-                            "font_size": 11
-                          }
-                        }
-                      }
-                    }
-                  }
-                }
-              ]
-            }
-          ]
+              }
+            ]
+          }
         },
         "options": {
           "auto_paginate_tables": false
@@ -1587,6 +1537,6 @@
       "table_min_font_size": 11,
       "textbox_min_font_size": 14,
       "show_slide_numbers": true,
-      "footer_text": "Confidential"
+      "footer_text": "Confidential - Customer Success Analysis"
     }
   }

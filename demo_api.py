@@ -14,8 +14,8 @@ Prerequisites:
     pip install requests
 
 Files included in this demo folder:
-    - demo_data_fake.json: Sample deck with 5 slides (table, logo, chart+table)
-    - template_v3.pptx: PowerPoint template with 4 slide layouts
+    - demo_data_fake.json: Sample deck with 5 slides (table, logo, chart+table, single chart)
+    - template_v3.pptx: PowerPoint template with 5 slide layouts
     - README.md: Complete API documentation
 
 Usage:
@@ -47,7 +47,7 @@ import requests
 # ============================================================================
 
 # Your API key (contact support to obtain)
-API_KEY = "YOUR_API_KEY_HERE"
+API_KEY = ""
 
 # Production API base URL
 BASE_URL = "https://powerpoint-api-gateway-36twek8d.uc.gateway.dev/api/v1"
@@ -978,11 +978,13 @@ def run_template_inheritance_demo():
     second_slide_id = slides_info[1]["slideId"] if len(slides_info) > 1 else first_slide_id
     third_slide_id = slides_info[2]["slideId"] if len(slides_info) > 2 else first_slide_id
     fourth_slide_id = slides_info[3]["slideId"] if len(slides_info) > 3 else first_slide_id
+    fifth_slide_id = slides_info[4]["slideId"] if len(slides_info) > 4 else first_slide_id
     print(f"\n  Template slide IDs:")
     print(f"    - Slide 0 (table only): {first_slide_id}")
     print(f"    - Slide 1 (table + textbox): {second_slide_id}")
     print(f"    - Slide 2 (logo page): {third_slide_id}")
     print(f"    - Slide 3 (chart + table): {fourth_slide_id}")
+    print(f"    - Slide 4 (single chart): {fifth_slide_id}")
 
     # Step 3: Load demo data WITHOUT font specifications
     print("\n[Step 3/4] Loading demo_data_fake.json (no font specs)...")
@@ -1029,13 +1031,26 @@ def run_template_inheritance_demo():
                 return True
         return False
 
+    def has_table_blocks(slide_data):
+        """Check if slide has table blocks"""
+        blocks = get_all_blocks(slide_data)
+        for block in blocks:
+            if block.get("type") == "table":
+                return True
+        return False
+
     for i, slide in enumerate(deck_request["slides"]):
         blocks = get_all_blocks(slide)
         has_text_block = any(b.get("type") == "text" for b in blocks)
         is_logo_slide = has_logo_cells(slide)
         is_chart_slide = has_chart_blocks(slide)
+        is_table_slide = has_table_blocks(slide)
 
-        if is_chart_slide:
+        if is_chart_slide and not is_table_slide:
+            # Single chart (no table) -> use single chart template
+            slide["template_slide_id"] = fifth_slide_id
+        elif is_chart_slide:
+            # Chart + table -> use two-column template
             slide["template_slide_id"] = fourth_slide_id
         elif is_logo_slide:
             slide["template_slide_id"] = third_slide_id
@@ -1124,11 +1139,13 @@ def run_end_to_end_demo():
     second_slide_id = slides_info[1]["slideId"] if len(slides_info) > 1 else first_slide_id  # Template slide index 1 (table + textbox)
     third_slide_id = slides_info[2]["slideId"] if len(slides_info) > 2 else first_slide_id  # Template slide index 2 (logo page)
     fourth_slide_id = slides_info[3]["slideId"] if len(slides_info) > 3 else first_slide_id  # Template slide index 3 (chart + table)
+    fifth_slide_id = slides_info[4]["slideId"] if len(slides_info) > 4 else first_slide_id  # Template slide index 4 (single chart)
     print(f"\n  Template slide IDs:")
     print(f"    - Slide 0 (table only): {first_slide_id}")
     print(f"    - Slide 1 (table + textbox): {second_slide_id}")
     print(f"    - Slide 2 (logo page): {third_slide_id}")
     print(f"    - Slide 3 (chart + table): {fourth_slide_id}")
+    print(f"    - Slide 4 (single chart): {fifth_slide_id}")
 
     # Step 3: Load demo data and update slide IDs
     print("\n[Step 3/4] Preparing slide data...")
@@ -1182,13 +1199,25 @@ def run_end_to_end_demo():
                 return True
         return False
 
+    def has_table_blocks(slide_data):
+        """Check if slide has table blocks"""
+        blocks = get_all_blocks(slide_data)
+        for block in blocks:
+            if block.get("type") == "table":
+                return True
+        return False
+
     for i, slide in enumerate(deck_request["slides"]):
         blocks = get_all_blocks(slide)
         has_text_block = any(b.get("type") == "text" for b in blocks)
         is_logo_slide = has_logo_cells(slide)
         is_chart_slide = has_chart_blocks(slide)
+        is_table_slide = has_table_blocks(slide)
 
-        if is_chart_slide:
+        if is_chart_slide and not is_table_slide:
+            slide["template_slide_id"] = fifth_slide_id  # Single chart template
+            print(f"    - Slide {i} (single chart) -> Template slide 4")
+        elif is_chart_slide:
             slide["template_slide_id"] = fourth_slide_id  # Chart + table template
             print(f"    - Slide {i} (chart + table) -> Template slide 3")
         elif is_logo_slide:
@@ -1226,6 +1255,7 @@ def run_end_to_end_demo():
     print("  - Conditional formatting (NPS, criticality, outlook)")
     print("  - Logo pages with automatic company logo fetching")
     print("  - Mixed content cells (bullets + quotes)")
+    print("  - Single full-page chart with data table")
 
     return result
 
@@ -1242,7 +1272,7 @@ if __name__ == "__main__":
     print(f"API Key: {'*' * 8}...{API_KEY[-4:] if len(API_KEY) > 4 else '****'}")
     print("\nIncluded files:")
     print("  - demo_data_fake.json: Sample deck with logo pages (inherits fonts)")
-    print("  - template_v3.pptx: Template with 3 slide layouts")
+    print("  - template_v3.pptx: Template with 5 slide layouts")
     print("  - README.md: Complete API documentation")
     print("\n" + "-" * 60)
     print("Available demo functions:")
