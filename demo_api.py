@@ -9,6 +9,7 @@ This script demonstrates how to use the PowerPoint Generation API to:
 4. Leverage template styling inheritance (fonts inherited from template)
 5. Create logo pages with automatic company logo fetching
 6. Create chart + table two-column slides with custom colors
+7. Upload a .pptx file and update chart data (preserve formatting)
 
 Prerequisites:
     pip install requests
@@ -458,6 +459,111 @@ def download_file(url: str, output_path: str):
             f.write(chunk)
 
     print(f"  Downloaded: {output_path}")
+
+
+def update_charts_from_file(pptx_path: str, updates: list, output_path: Optional[str] = None) -> dict:
+    """
+    Upload a .pptx file and update chart data in one request.
+
+    Use this when you have a PowerPoint file (e.g., downloaded and tweaked in
+    PowerPoint) and want to refresh chart data while preserving all formatting.
+
+    The file is uploaded as multipart form-data along with chart update instructions.
+    The API returns a new presentation ID and download URL.
+
+    Args:
+        pptx_path: Path to the .pptx file to upload
+        updates: List of chart update dicts, each containing:
+            - slide_index: Zero-based slide index
+            - chart_index: Zero-based chart index on the slide (default 0)
+            - chart_data: New chart data with categories and series
+        output_path: Optional path to save the updated .pptx file
+
+    Returns:
+        dict with status, presentation_id (new cupd_ ID), slides_updated, download_url, etc.
+
+    Example:
+        >>> result = update_charts_from_file(
+        ...     "my_tweaked_deck.pptx",
+        ...     [{
+        ...         "slide_index": 2,
+        ...         "chart_index": 0,
+        ...         "chart_data": {
+        ...             "categories": ["Q1", "Q2", "Q3", "Q4"],
+        ...             "series": [{"name": "Revenue", "values": [100, 150, 200, 250]}]
+        ...         }
+        ...     }],
+        ...     output_path="updated_deck.pptx"
+        ... )
+        >>> print(result["presentation_id"])  # New ID: cupd_abc123
+    """
+    print(f"Updating charts in uploaded file: {os.path.basename(pptx_path)}")
+
+    filename = os.path.basename(pptx_path)
+    url = f"{BASE_URL}/presentations/_/update-charts"
+
+    # Use headers without Content-Type so requests sets the multipart boundary
+    headers = {k: v for k, v in HEADERS.items() if k != "Content-Type"}
+
+    with open(pptx_path, "rb") as f:
+        response = requests.put(
+            url,
+            headers=headers,
+            files={"file": (filename, f, "application/vnd.openxmlformats-officedocument.presentationml.presentation")},
+            data={"updates": json.dumps(updates)}
+        )
+    response.raise_for_status()
+    result = response.json()
+
+    print(f"  Status: {result.get('status')}")
+    print(f"  New presentation ID: {result.get('presentation_id')}")
+    print(f"  Slides updated: {result.get('slides_updated')}")
+
+    if output_path and result.get("download_url"):
+        download_file(result["download_url"], output_path)
+
+    return result
+
+
+def update_charts(presentation_id: str, updates: list, output_path: Optional[str] = None) -> dict:
+    """
+    Update chart data in a previously generated presentation.
+
+    Replaces chart data values while preserving all formatting (colors, fonts,
+    legend, axes, layout). This is useful when new data arrives and you want to
+    refresh the numbers without losing manual formatting tweaks.
+
+    Args:
+        presentation_id: The generation_id of a previously generated presentation
+        updates: List of chart update dicts, each containing:
+            - slide_index: Zero-based slide index
+            - chart_index: Zero-based chart index on the slide (default 0)
+            - chart_data: New chart data with categories and series
+        output_path: Optional path to save the updated .pptx file
+
+    Returns:
+        dict with status, slides_updated, download_url, etc.
+
+    Example:
+        >>> result = update_charts("gen_abc123", [
+        ...     {
+        ...         "slide_index": 5,
+        ...         "chart_index": 0,
+        ...         "chart_data": {
+        ...             "categories": ["Q1", "Q2", "Q3", "Q4"],
+        ...             "series": [
+        ...                 {"name": "Revenue", "values": [100, 150, 200, 250]}
+        ...             ]
+        ...         }
+        ...     }
+        ... ])
+    """
+    result = make_request("PUT", f"/presentations/{presentation_id}/update-charts", {"updates": updates})
+
+    if output_path and result.get("download_url"):
+        download_file(result["download_url"], output_path)
+
+    return result
 
 
 # ============================================================================
@@ -1260,6 +1366,185 @@ def run_end_to_end_demo():
     return result
 
 
+def demo_chart_update(generation_id: str, before_path: str = None, after_path: str = None) -> dict:
+    """
+    Demo: Update chart data in a previously generated presentation.
+
+    This demonstrates the chart update workflow:
+        1. Download the current version of the deck ("before")
+        2. Call update_charts() with new NPS survey numbers
+        3. Download the updated version ("after")
+
+    The update preserves all chart formatting (colors, fonts, legend, axes)
+    while replacing only the data values. This is the workflow customers use
+    when they've manually tweaked a deck in PowerPoint and want to refresh
+    the numbers without losing their formatting changes.
+
+    Args:
+        generation_id: The generation_id from a prior deck generation
+        before_path: Path to save the "before" file (optional)
+        after_path: Path to save the "after" file (optional)
+
+    Returns:
+        dict with update result including download_url
+    """
+    print("\n" + "=" * 60)
+    print("DEMO: Chart Data Update (Preserve Formatting)")
+    print("=" * 60)
+
+    demo_dir = os.path.dirname(__file__)
+    before_path = before_path or os.path.join(demo_dir, "demo_chart_before_update.pptx")
+    after_path = after_path or os.path.join(demo_dir, "demo_chart_after_update.pptx")
+
+    # Step 1: Download the current version as "before"
+    print(f"\n[Step 1/3] Downloading current deck (before update)...")
+    download_file(generation_id, before_path)
+
+    # Step 2: Update the NPS chart with new survey data
+    # Original values (from demo_data_fake.json):
+    #   Promoters:  [45, 38, 12, 28, 52, 31,  8, 42]
+    #   Passives:   [32, 35, 25, 38, 28, 42, 22, 33]
+    #   Detractors: [23, 27, 63, 34, 20, 27, 70, 25]
+    #
+    # New values simulate a Q1 2025 survey refresh:
+    print("\n[Step 2/3] Updating NPS chart with Q1 2025 survey data...")
+    new_chart_data = {
+        "categories": [
+            "Acme Corp", "TechFlow Inc", "DataSync Ltd", "CloudFirst",
+            "Innovate Labs", "SecureNet", "GrowthMetrics", "Nexus Digital"
+        ],
+        "series": [
+            {"name": "Promoters (9-10)", "values": [50, 42, 18, 35, 48, 36, 15, 46]},
+            {"name": "Passives (7-8)", "values": [30, 33, 30, 35, 32, 38, 28, 30]},
+            {"name": "Detractors (0-6)", "values": [20, 25, 52, 30, 20, 26, 57, 24]}
+        ]
+    }
+
+    updates = [
+        {
+            "slide_index": 5,   # NPS chart slide (slide 4 in request -> slide 5 due to table pagination)
+            "chart_index": 0,   # First (only) chart on the slide
+            "chart_data": new_chart_data
+        }
+    ]
+
+    print(f"  Target: slide_index=5, chart_index=0")
+    print(f"  Updating 3 series across 8 categories")
+
+    result = update_charts(generation_id, updates, output_path=after_path)
+
+    # Step 3: Summary
+    print(f"\n[Step 3/3] Update complete!")
+    print(f"  Status: {result.get('status', 'N/A')}")
+    print(f"  Slides updated: {result.get('slides_updated', 'N/A')}")
+
+    print(f"\n--- Compare files ---")
+    print(f"  Before: {before_path}")
+    print(f"  After:  {after_path}")
+    print(f"\nOpen both files in PowerPoint to verify:")
+    print(f"  - Chart data values have changed (new NPS numbers)")
+    print(f"  - Chart formatting is preserved (colors, fonts, legend, axes)")
+
+    return result
+
+
+def run_chart_update_from_file_demo(pptx_path: str) -> dict:
+    """
+    Run the file upload + chart update demo.
+
+    This demonstrates the workflow where a user:
+        1. Has a .pptx file (e.g., generated earlier, then tweaked in PowerPoint)
+        2. Uploads it to the API with new chart data
+        3. Gets back an updated .pptx with refreshed chart numbers
+
+    This is the typical workflow for customers who:
+        - Generate a deck via the API
+        - Download and tweak it manually in PowerPoint (adjust layout, add notes)
+        - Want to refresh the data without losing their manual changes
+
+    Args:
+        pptx_path: Path to the .pptx file to upload and update
+
+    Returns:
+        dict with update result
+
+    Example:
+        >>> run_chart_update_from_file_demo("my_tweaked_deck.pptx")
+    """
+    print("=" * 60)
+    print("CHART UPDATE FROM FILE DEMO")
+    print("=" * 60)
+    print(f"\nUploading: {pptx_path}")
+
+    demo_dir = os.path.dirname(__file__)
+    output_path = os.path.join(demo_dir, "demo_chart_file_upload_result.pptx")
+
+    updates = [
+        {
+            "slide_index": 5,
+            "chart_index": 0,
+            "chart_data": {
+                "categories": [
+                    "Acme Corp", "TechFlow Inc", "DataSync Ltd", "CloudFirst",
+                    "Innovate Labs", "SecureNet", "GrowthMetrics", "Nexus Digital"
+                ],
+                "series": [
+                    {"name": "Promoters (9-10)", "values": [60, 50, 20, 35, 65, 40, 15, 55]},
+                    {"name": "Passives (7-8)", "values": [25, 30, 25, 35, 20, 35, 20, 30]},
+                    {"name": "Detractors (0-6)", "values": [15, 20, 55, 30, 15, 25, 65, 15]}
+                ],
+                "data_rows": [
+                    ["n=", "200", "180", "120", "210", "250", "160", "90", "220"],
+                    ["NPS", "+45", "+30", "-35", "+5", "+50", "+15", "-50", "+40"]
+                ],
+                "data_table_header_column": True
+            }
+        }
+    ]
+
+    result = update_charts_from_file(pptx_path, updates, output_path=output_path)
+
+    print("\n" + "=" * 60)
+    print("CHART UPDATE FROM FILE DEMO COMPLETE!")
+    print("=" * 60)
+    print(f"\nResult saved to: {output_path}")
+
+    return result
+
+
+def run_chart_update_demo(generation_id: str) -> dict:
+    """
+    Run the chart update demo end-to-end.
+
+    Takes a generation_id from a prior run_end_to_end_demo() and updates
+    the NPS chart with new survey data, saving before/after files for
+    visual comparison.
+
+    Args:
+        generation_id: The generation_id from run_end_to_end_demo()
+
+    Returns:
+        dict with update result
+
+    Example:
+        >>> result = run_end_to_end_demo()
+        >>> gen_id = result["generation_id"]
+        >>> run_chart_update_demo(gen_id)
+    """
+    print("=" * 60)
+    print("CHART UPDATE DEMO")
+    print("=" * 60)
+    print(f"\nUsing generation_id: {generation_id}")
+
+    result = demo_chart_update(generation_id)
+
+    print("\n" + "=" * 60)
+    print("CHART UPDATE DEMO COMPLETE!")
+    print("=" * 60)
+
+    return result
+
+
 # ============================================================================
 # MAIN
 # ============================================================================
@@ -1290,12 +1575,19 @@ if __name__ == "__main__":
     print("-" * 60)
     print("  run_end_to_end_demo()           - Full demo with logo pages")
     print("  run_template_inheritance_demo() - Full demo with inherited styling")
+    print("  run_chart_update_demo(gen_id)   - Update chart data, preserve formatting")
+    print("  run_chart_update_from_file_demo(path) - Upload .pptx + update charts")
     print("-" * 60)
     print("\nQuickstart:")
     print("  1. Update API_KEY and BASE_URL at the top of this file")
     print("  2. Run: run_end_to_end_demo()  OR  run_template_inheritance_demo()")
+    print("  3. Then: run_chart_update_demo(gen_id)  to demo chart updates")
     print()
 
     # Run the end-to-end demo (now includes logo pages by default)
-    run_end_to_end_demo()
+    result = run_end_to_end_demo()
     run_template_inheritance_demo()
+
+    # Run chart update demo if the end-to-end demo succeeded
+    if result and result.get("generation_id"):
+        run_chart_update_demo(result["generation_id"])

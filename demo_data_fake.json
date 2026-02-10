@@ -1523,6 +1523,12 @@
                   ],
                   "data_table_header_column": true
                 }
+              },
+              {
+                "type": "text",
+                "text": {
+                  "text": "Question: What is driving the significant detractor rates at DataSync Ltd and GrowthMetrics?"
+                }
               }
             ]
           }

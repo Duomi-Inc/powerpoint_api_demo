@@ -17,6 +17,9 @@ This guide provides comprehensive documentation for using the PowerPoint Generat
   - [Charts](#charts)
   - [Logo Cells](#logo-cells)
   - [Text Formatting](#text-formatting)
+- [Chart Updates](#chart-updates)
+  - [Update Charts by ID](#update-charts-by-id)
+  - [Update Charts with File Upload](#update-charts-with-file-upload)
 - [Generation Options](#generation-options)
 - [Error Handling](#error-handling)
 - [Complete Examples](#complete-examples)
@@ -32,6 +35,7 @@ The PowerPoint Generation API allows you to:
 1. **Upload and manage templates** - Upload PowerPoint templates (.pptx) and analyze them for available placeholders
 2. **Generate single slides** - Create a slide from a template slide with your data
 3. **Generate full decks** - Create complete presentations with multiple slides asynchronously
+4. **Update chart data** - Refresh chart data in existing presentations while preserving all formatting
 
 All operations are scoped to an organization for multi-tenancy.
 
@@ -328,6 +332,120 @@ X-API-Key: your-api-key
 ```
 
 Returns the .pptx file as a binary stream.
+
+---
+
+## Chart Updates
+
+Update chart data in existing presentations while preserving all formatting (colors, fonts, legend, axes, layout). This is useful when:
+
+- New data arrives and you want to refresh numbers without regenerating the entire deck
+- A user has downloaded and manually tweaked a deck in PowerPoint, then wants to update chart data without losing their changes
+
+### Update Charts by ID
+
+Update charts in a previously generated presentation using its generation ID.
+
+```http
+PUT /api/v1/presentations/{presentation_id}/update-charts
+X-API-Key: your-api-key
+Content-Type: application/json
+
+{
+  "updates": [
+    {
+      "slide_index": 5,
+      "chart_index": 0,
+      "chart_data": {
+        "categories": ["Acme Corp", "TechFlow Inc", "DataSync Ltd", "CloudFirst"],
+        "series": [
+          {"name": "Promoters (9-10)", "values": [60, 50, 20, 35]},
+          {"name": "Passives (7-8)", "values": [25, 30, 25, 35]},
+          {"name": "Detractors (0-6)", "values": [15, 20, 55, 30]}
+        ],
+        "data_rows": [
+          ["n=", "200", "180", "120", "210"],
+          ["NPS", "+45", "+30", "-35", "+5"]
+        ],
+        "data_table_header_column": true
+      }
+    }
+  ]
+}
+```
+
+**Response:**
+```json
+{
+  "presentation_id": "gen_abc123",
+  "status": "completed",
+  "slides_updated": 1,
+  "file_size": 7450000,
+  "download_url": "https://storage.example.com/download...",
+  "download_url_expires_in": 3600,
+  "created_at": "2024-01-15T10:45:00Z"
+}
+```
+
+**Accepts both ID formats:**
+- `pres_xxx` - From single slide generation
+- `gen_xxx` - From deck generation
+
+### Update Charts with File Upload
+
+Upload a .pptx file and update chart data in one request. Use `_` as the presentation ID placeholder since the file is provided directly.
+
+```http
+PUT /api/v1/presentations/_/update-charts
+X-API-Key: your-api-key
+Content-Type: multipart/form-data
+
+file: (binary .pptx file)
+updates: [{"slide_index": 5, "chart_index": 0, "chart_data": {...}}]
+```
+
+The `updates` field is a JSON string sent as a form field alongside the file.
+
+**Response:**
+```json
+{
+  "presentation_id": "cupd_xyz789",
+  "status": "completed",
+  "slides_updated": 1,
+  "file_size": 7450000,
+  "download_url": "https://storage.example.com/download...",
+  "download_url_expires_in": 3600,
+  "created_at": "2024-01-15T10:45:00Z"
+}
+```
+
+**Note:** A new `cupd_` presentation ID is returned. The original file is not modified.
+
+### Chart Update Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `slide_index` | integer | Zero-based slide index in the presentation |
+| `chart_index` | integer | Zero-based chart index on the slide (default 0) |
+| `chart_data` | object | New chart data (see below) |
+
+**chart_data fields:**
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `categories` | array | Category labels for the chart |
+| `series` | array | Data series: `{name, values}` |
+| `data_rows` | array | Optional data table rows below the chart |
+| `data_table_header_column` | boolean | Style first column of data table as header |
+
+**Important:** Only provide data fields in `chart_data`. Omit formatting fields (`chart_type`, `title`, `legend`, `axes`) to preserve the existing chart's formatting.
+
+### Typical Workflow: Generate, Tweak, Update
+
+1. **Generate** a deck via `POST /presentations/generate-deck`
+2. **Download** and open in PowerPoint — make manual formatting tweaks
+3. **Upload + Update** via `PUT /presentations/_/update-charts` with the tweaked file and new data
+4. **Download** the result with refreshed data and preserved formatting
 
 ---
 
@@ -1492,9 +1610,11 @@ This demo includes the following files:
 - **Slide 3**: Chart + table - `percent_stacked_column` with `legend.position`
 - **Slide 4**: Single chart - full-page `stacked_bar` chart with data table
 
-To run the demo:
-1. Run `python demo_api.py` to execute the end-to-end demo
+To run the demos:
+1. Run `python demo_api.py` to execute the end-to-end demo (generates a deck)
 2. The generated deck will inherit fonts from the template and include all slide types
+3. Chart update demo runs automatically after deck generation
+4. To test file upload + chart update: `run_chart_update_from_file_demo('demo_output.pptx')`
 
 ---
 
