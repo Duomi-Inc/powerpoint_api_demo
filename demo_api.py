@@ -16,7 +16,8 @@ Prerequisites:
 
 Files included in this demo folder:
     - demo_data_fake.json: Sample deck with 5 slides (table, logo, chart+table, single chart)
-    - template_v3.pptx: PowerPoint template with 5 slide layouts
+    - template_v3.pptx: PowerPoint template with 5 slide layouts (16:9)
+    - template_v3_4by3.pptx: PowerPoint template with 5 slide layouts (4:3)
     - README.md: Complete API documentation
 
 Usage:
@@ -53,6 +54,10 @@ API_KEY = ""
 # Production API base URL
 BASE_URL = "https://powerpoint-api-gateway-36twek8d.uc.gateway.dev/api/v1"
 
+# Aspect ratio: "16:9" or "4:3"
+# Controls which template file is used (template_v3.pptx vs template_v3_4by3.pptx)
+ASPECT_RATIO = "4:3"
+
 # Request headers - API key is required for all authenticated requests
 HEADERS = {
     "X-API-Key": API_KEY,
@@ -63,6 +68,24 @@ HEADERS = {
 # ============================================================================
 # HELPER FUNCTIONS
 # ============================================================================
+
+def get_template_path(aspect_ratio: str = None) -> str:
+    """
+    Get the template file path based on aspect ratio.
+
+    Args:
+        aspect_ratio: "16:9" or "4:3". If None, uses the global ASPECT_RATIO setting.
+
+    Returns:
+        Absolute path to the appropriate template file.
+    """
+    ratio = aspect_ratio or ASPECT_RATIO
+    if ratio == "16:9":
+        filename = "template_v3.pptx"
+    else:
+        filename = "template_v3_4by3.pptx"
+    return os.path.join(os.path.dirname(__file__), filename)
+
 
 def make_request(method: str, endpoint: str, json_data: dict = None, stream: bool = False):
     """
@@ -756,10 +779,11 @@ def demo_template_styling_inheritance():
 """)
 
     print("To generate with template styling inheritance:")
-    print("  1. Upload template_v3.pptx")
+    print("  1. Upload template_v3.pptx (16:9) or template_v3_4by3.pptx (4:3)")
     print("  2. Use demo_data_fake.json for slide data (no font specs)")
     print("  3. Fonts will match the template's placeholder formatting")
-    print("\nRun: run_template_inheritance_demo()")
+    print("\nRun: run_template_inheritance_demo()  # uses global ASPECT_RATIO")
+    print('     run_template_inheritance_demo("16:9")  # explicit 16:9')
 
 
 def demo_table_slide():
@@ -1037,23 +1061,27 @@ result = generate_deck(
 # END-TO-END DEMOS
 # ============================================================================
 
-def run_template_inheritance_demo():
+def run_template_inheritance_demo(aspect_ratio: str = None):
     """
     Run a demo showcasing template styling inheritance:
-    1. Upload template_v3.pptx (with custom styling)
+    1. Upload template (with custom styling)
     2. Generate a deck using demo_data_fake.json (no font specs)
     3. The output will inherit fonts from the template
 
     This demonstrates that when you omit font_name/font_size in your JSON,
     the generated slides use whatever fonts are defined in the template.
+
+    Args:
+        aspect_ratio: "16:9" or "4:3". If None, uses the global ASPECT_RATIO setting.
     """
+    ratio = aspect_ratio or ASPECT_RATIO
     print("=" * 60)
-    print("TEMPLATE STYLING INHERITANCE DEMO")
+    print(f"TEMPLATE STYLING INHERITANCE DEMO ({ratio})")
     print("=" * 60)
 
     # Step 1: Upload the template
     print("\n[Step 1/4] Uploading template with custom styling...")
-    template_path = os.path.join(os.path.dirname(__file__), "template_v3.pptx")
+    template_path = get_template_path(ratio)
 
     if not os.path.exists(template_path):
         print(f"ERROR: Template not found: {template_path}")
@@ -1191,7 +1219,7 @@ def run_template_inheritance_demo():
     return result
 
 
-def run_end_to_end_demo():
+def run_end_to_end_demo(aspect_ratio: str = None):
     """
     Run a complete end-to-end demo:
     1. Upload the sample template
@@ -1206,14 +1234,18 @@ def run_end_to_end_demo():
         - Mixed content cells (bullets + quotes)
 
     This is the quickest way to test the full API workflow.
+
+    Args:
+        aspect_ratio: "16:9" or "4:3". If None, uses the global ASPECT_RATIO setting.
     """
+    ratio = aspect_ratio or ASPECT_RATIO
     print("=" * 60)
-    print("END-TO-END DEMO (with Logo Pages)")
+    print(f"END-TO-END DEMO (with Logo Pages) - {ratio}")
     print("=" * 60)
 
     # Step 1: Upload template
     print("\n[Step 1/4] Uploading template...")
-    template_path = os.path.join(os.path.dirname(__file__), "template_v3.pptx")
+    template_path = get_template_path(ratio)
 
     if not os.path.exists(template_path):
         print(f"ERROR: Template not found: {template_path}")
@@ -1557,8 +1589,23 @@ if __name__ == "__main__":
     print(f"API Key: {'*' * 8}...{API_KEY[-4:] if len(API_KEY) > 4 else '****'}")
     print("\nIncluded files:")
     print("  - demo_data_fake.json: Sample deck with logo pages (inherits fonts)")
-    print("  - template_v3.pptx: Template with 5 slide layouts")
+    print("  - template_v3.pptx: Template with 5 slide layouts (16:9)")
+    print("  - template_v3_4by3.pptx: Template with 5 slide layouts (4:3)")
     print("  - README.md: Complete API documentation")
+
+    # Prompt user for aspect ratio
+    print("\n" + "-" * 60)
+    print("Select aspect ratio:")
+    print("  1. 4:3  (template_v3_4by3.pptx)")
+    print("  2. 16:9 (template_v3.pptx)")
+    print("-" * 60)
+    choice = input("Enter 1 or 2 [default: 1]: ").strip()
+    if choice == "2":
+        ASPECT_RATIO = "16:9"
+    else:
+        ASPECT_RATIO = "4:3"
+    print(f"\nUsing aspect ratio: {ASPECT_RATIO}")
+
     print("\n" + "-" * 60)
     print("Available demo functions:")
     print("-" * 60)
@@ -1580,8 +1627,9 @@ if __name__ == "__main__":
     print("-" * 60)
     print("\nQuickstart:")
     print("  1. Update API_KEY and BASE_URL at the top of this file")
-    print("  2. Run: run_end_to_end_demo()  OR  run_template_inheritance_demo()")
-    print("  3. Then: run_chart_update_demo(gen_id)  to demo chart updates")
+    print("  2. Run: python demo_api.py")
+    print("  3. Choose aspect ratio (4:3 or 16:9)")
+    print("  4. Then: run_chart_update_demo(gen_id)  to demo chart updates")
     print()
 
     # Run the end-to-end demo (now includes logo pages by default)

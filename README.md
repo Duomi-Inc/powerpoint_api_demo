@@ -1601,17 +1601,39 @@ This demo includes the following files:
 | File | Description |
 |------|-------------|
 | `demo_data_fake.json` | Sample deck with 5 slides demonstrating all features |
-| `template_v3.pptx` | Template with 5 slide layouts (table+textbox, table-only, logo page, chart+table, single chart) |
+| `template_v3.pptx` | Template with 5 slide layouts — **16:9** aspect ratio |
+| `template_v3_4by3.pptx` | Template with 5 slide layouts — **4:3** aspect ratio |
 
-**Slide layouts in the demo:**
+Both templates contain the same 5 slide layouts with identical placeholder structure. Choose the one that matches your desired aspect ratio.
+
+**Slide layouts in both templates:**
 - **Slide 0**: Table + textbox - table with commentary bullets
 - **Slide 1**: Table only - simple table layout
 - **Slide 2**: Logo page - table with company logos (`is_logo: true`)
 - **Slide 3**: Chart + table - `percent_stacked_column` with `legend.position`
 - **Slide 4**: Single chart - full-page `stacked_bar` chart with data table
 
+### Aspect Ratio (16:9 vs 4:3)
+
+The demo supports both **16:9** (widescreen) and **4:3** (standard) aspect ratios:
+
+| Aspect Ratio | Template File | Best For |
+|--------------|---------------|----------|
+| **4:3** | `template_v3_4by3.pptx` | Print, classic presentations |
+| **16:9** | `template_v3.pptx` | Widescreen displays, modern presentations |
+
+When running `demo_api.py`, you'll be prompted to select an aspect ratio. You can also pass it explicitly to demo functions:
+
+```python
+run_end_to_end_demo("4:3")              # 4:3 aspect ratio
+run_end_to_end_demo("16:9")             # 16:9 aspect ratio
+run_template_inheritance_demo("4:3")    # 4:3 aspect ratio
+```
+
+The `ASPECT_RATIO` global variable in `demo_api.py` controls the default (set to `"4:3"`).
+
 To run the demos:
-1. Run `python demo_api.py` to execute the end-to-end demo (generates a deck)
+1. Run `python demo_api.py` — you'll be prompted to choose 4:3 or 16:9
 2. The generated deck will inherit fonts from the template and include all slide types
 3. Chart update demo runs automatically after deck generation
 4. To test file upload + chart update: `run_chart_update_from_file_demo('demo_output.pptx')`
