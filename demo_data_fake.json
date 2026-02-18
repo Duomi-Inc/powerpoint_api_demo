@@ -2,6 +2,29 @@
     "slides": [
       {
         "slide_data": {
+          "title": "Agenda",
+          "content": {
+            "blocks": [
+              {
+                "type": "agenda",
+                "agenda": {
+                  "sections": [
+                    "Customer Health Overview",
+                    "Renewal Outlook",
+                    "Advisory Board",
+                    "Market Analysis",
+                    "NPS Deep Dive"
+                  ],
+                  "active_index": 0,
+                  "active_font_color": "#FFFFFF"
+                }
+              }
+            ]
+          }
+        }
+      },
+      {
+        "slide_data": {
           "title": "Customer Health, Engagement, and Expansion Potential",
           "content": {
             "blocks": [

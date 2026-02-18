@@ -13,6 +13,7 @@ This guide provides comprehensive documentation for using the PowerPoint Generat
 - [Slide Data Schema](#slide-data-schema)
   - [Basic Structure](#basic-structure)
   - [Content Blocks](#content-blocks)
+  - [Agenda Slides](#agenda-slides)
   - [Tables](#tables)
   - [Charts](#charts)
   - [Logo Cells](#logo-cells)
@@ -35,7 +36,8 @@ The PowerPoint Generation API allows you to:
 1. **Upload and manage templates** - Upload PowerPoint templates (.pptx) and analyze them for available placeholders
 2. **Generate single slides** - Create a slide from a template slide with your data
 3. **Generate full decks** - Create complete presentations with multiple slides asynchronously
-4. **Update chart data** - Refresh chart data in existing presentations while preserving all formatting
+4. **Create agenda slides** - Dynamic agenda pages with section highlighting and numbered indicators
+5. **Update chart data** - Refresh chart data in existing presentations while preserving all formatting
 
 All operations are scoped to an organization for multi-tenancy.
 
@@ -440,6 +442,31 @@ The `updates` field is a JSON string sent as a form field alongside the file.
 
 **Important:** Only provide data fields in `chart_data`. Omit formatting fields (`chart_type`, `title`, `legend`, `axes`) to preserve the existing chart's formatting.
 
+### Chart Update Errors
+
+The chart update endpoint validates the request and returns specific error messages:
+
+| Error | Status | Description |
+|-------|--------|-------------|
+| Slide index out of range | 400 | `slide_index` exceeds the number of slides in the presentation |
+| No chart found | 400 | No chart exists at the specified `chart_index` on the given slide |
+| Presentation not found | 404 | The `presentation_id` or `gen_id` does not exist |
+
+**Example error response:**
+```json
+{
+  "detail": "slide_index 7 out of range. Presentation has 7 slides (valid: 0-6)."
+}
+```
+
+```json
+{
+  "detail": "No chart found at chart_index 0 on slide 3. This slide has 0 chart(s)."
+}
+```
+
+**Note:** The `slide_index` refers to the zero-based index in the **output** presentation, which may differ from the input slide order due to table pagination. For example, if slide 2 paginates into 3 pages, slides after it shift by 2. Use `total_pages_generated` and `slide_results` from the generation response to determine the correct output indices.
+
 ### Typical Workflow: Generate, Tweak, Update
 
 1. **Generate** a deck via `POST /presentations/generate-deck`
@@ -600,6 +627,81 @@ Tables support headers, formatting, and conditional styling:
   }
 }
 ```
+
+### Agenda Slides
+
+Agenda blocks create section-based agenda slides with numbered items and active section highlighting. The API clones the agenda template slide, extracts styling from the existing table and oval shapes, then recreates them with the correct number of sections.
+
+#### Agenda Block Structure
+
+```json
+{
+  "type": "agenda",
+  "agenda": {
+    "sections": [
+      "Customer Health Overview",
+      "Renewal Outlook",
+      "Advisory Board",
+      "Market Analysis",
+      "NPS Deep Dive"
+    ],
+    "active_index": 0,
+    "active_font_color": "#FFFFFF"
+  }
+}
+```
+
+#### Agenda Properties
+
+| Property | Type | Required | Description |
+|----------|------|----------|-------------|
+| `sections` | array | Yes | List of section title strings |
+| `active_index` | integer | No | Zero-based index of the currently active section. `null` or omitted for no highlighting. |
+| `active_font_color` | string | No | Hex color for the active section text (e.g., `"#FFFFFF"`). Defaults to template styling. |
+| `active_bold` | boolean | No | Whether the active section is bold. Defaults to `true`. |
+| `active_underline` | boolean | No | Whether the active section is underlined. Defaults to `true`. |
+
+#### How It Works
+
+1. The template agenda slide should contain a **1-column borderless table** with section titles and **oval shapes** with numbers aligned to each row
+2. The API extracts all styling (fonts, colors, positions, sizes) from the template
+3. Removes the existing table and ovals
+4. Recreates them with the correct number of sections, preserving all template styling
+5. Applies active highlighting to the specified section
+
+#### Complete Agenda Slide Example
+
+```json
+{
+  "template_slide_id": "slide_agenda",
+  "slide_data": {
+    "title": "Agenda",
+    "content": {
+      "blocks": [
+        {
+          "type": "agenda",
+          "agenda": {
+            "sections": [
+              "Customer Health Overview",
+              "Renewal Outlook",
+              "Advisory Board"
+            ],
+            "active_index": 1,
+            "active_font_color": "#FFFFFF",
+            "active_bold": true,
+            "active_underline": true
+          }
+        }
+      ]
+    }
+  }
+}
+```
+
+#### Validation
+
+- `active_index` must be within range `0` to `len(sections) - 1` if provided
+- Returns `400` with error message if `active_index` is out of range
 
 ### Tables
 
@@ -1459,14 +1561,16 @@ Some slides may succeed while others fail:
         "content": {
           "blocks": [
             {
-              "type": "text",
-              "text": {
-                "bullets": [
+              "type": "agenda",
+              "agenda": {
+                "sections": [
                   "Financial Performance",
                   "Customer Growth",
                   "Product Updates",
                   "2025 Outlook"
-                ]
+                ],
+                "active_index": 0,
+                "active_font_color": "#FFFFFF"
               }
             }
           ]
@@ -1600,11 +1704,11 @@ This demo includes the following files:
 
 | File | Description |
 |------|-------------|
-| `demo_data_fake.json` | Sample deck with 5 slides demonstrating all features |
-| `template_v3.pptx` | Template with 5 slide layouts — **16:9** aspect ratio |
-| `template_v3_4by3.pptx` | Template with 5 slide layouts — **4:3** aspect ratio |
+| `demo_data_fake.json` | Sample deck with 6 slides demonstrating all features (agenda, tables, logos, charts) |
+| `template_v3.pptx` | Template with 6 slide layouts — **16:9** aspect ratio |
+| `template_v3_4by3.pptx` | Template with 6 slide layouts — **4:3** aspect ratio |
 
-Both templates contain the same 5 slide layouts with identical placeholder structure. Choose the one that matches your desired aspect ratio.
+Both templates contain the same 6 slide layouts with identical placeholder structure. Choose the one that matches your desired aspect ratio.
 
 **Slide layouts in both templates:**
 - **Slide 0**: Table + textbox - table with commentary bullets
@@ -1612,6 +1716,7 @@ Both templates contain the same 5 slide layouts with identical placeholder struc
 - **Slide 2**: Logo page - table with company logos (`is_logo: true`)
 - **Slide 3**: Chart + table - `percent_stacked_column` with `legend.position`
 - **Slide 4**: Single chart - full-page `stacked_bar` chart with data table
+- **Slide 5**: Agenda - section list with numbered ovals and active highlighting
 
 ### Aspect Ratio (16:9 vs 4:3)
 

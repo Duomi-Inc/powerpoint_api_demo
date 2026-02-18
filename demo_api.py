@@ -15,9 +15,9 @@ Prerequisites:
     pip install requests
 
 Files included in this demo folder:
-    - demo_data_fake.json: Sample deck with 5 slides (table, logo, chart+table, single chart)
-    - template_v3.pptx: PowerPoint template with 5 slide layouts (16:9)
-    - template_v3_4by3.pptx: PowerPoint template with 5 slide layouts (4:3)
+    - demo_data_fake.json: Sample deck with 6 slides (agenda, table, logo, chart+table, single chart)
+    - template_v3.pptx: PowerPoint template with 6 slide layouts (16:9)
+    - template_v3_4by3.pptx: PowerPoint template with 6 slide layouts (4:3)
     - README.md: Complete API documentation
 
 Usage:
@@ -118,6 +118,8 @@ def make_request(method: str, endpoint: str, json_data: dict = None, stream: boo
     )
 
     # Raise exception for error status codes (4xx, 5xx)
+    if not response.ok:
+        print(f"  ERROR {response.status_code}: {response.text}")
     response.raise_for_status()
 
     if stream:
@@ -570,7 +572,7 @@ def update_charts(presentation_id: str, updates: list, output_path: Optional[str
     Example:
         >>> result = update_charts("gen_abc123", [
         ...     {
-        ...         "slide_index": 5,
+        ...         "slide_index": 7,
         ...         "chart_index": 0,
         ...         "chart_data": {
         ...             "categories": ["Q1", "Q2", "Q3", "Q4"],
@@ -1113,12 +1115,14 @@ def run_template_inheritance_demo(aspect_ratio: str = None):
     third_slide_id = slides_info[2]["slideId"] if len(slides_info) > 2 else first_slide_id
     fourth_slide_id = slides_info[3]["slideId"] if len(slides_info) > 3 else first_slide_id
     fifth_slide_id = slides_info[4]["slideId"] if len(slides_info) > 4 else first_slide_id
+    sixth_slide_id = slides_info[5]["slideId"] if len(slides_info) > 5 else first_slide_id
     print(f"\n  Template slide IDs:")
     print(f"    - Slide 0 (table only): {first_slide_id}")
     print(f"    - Slide 1 (table + textbox): {second_slide_id}")
     print(f"    - Slide 2 (logo page): {third_slide_id}")
     print(f"    - Slide 3 (chart + table): {fourth_slide_id}")
     print(f"    - Slide 4 (single chart): {fifth_slide_id}")
+    print(f"    - Slide 5 (agenda): {sixth_slide_id}")
 
     # Step 3: Load demo data WITHOUT font specifications
     print("\n[Step 3/4] Loading demo_data_fake.json (no font specs)...")
@@ -1157,6 +1161,14 @@ def run_template_inheritance_demo(aspect_ratio: str = None):
                             return True
         return False
 
+    def has_agenda_blocks(slide_data):
+        """Check if slide has agenda blocks"""
+        blocks = get_all_blocks(slide_data)
+        for block in blocks:
+            if block.get("type") == "agenda":
+                return True
+        return False
+
     def has_chart_blocks(slide_data):
         """Check if slide has chart blocks"""
         blocks = get_all_blocks(slide_data)
@@ -1176,11 +1188,14 @@ def run_template_inheritance_demo(aspect_ratio: str = None):
     for i, slide in enumerate(deck_request["slides"]):
         blocks = get_all_blocks(slide)
         has_text_block = any(b.get("type") == "text" for b in blocks)
+        is_agenda_slide = has_agenda_blocks(slide)
         is_logo_slide = has_logo_cells(slide)
         is_chart_slide = has_chart_blocks(slide)
         is_table_slide = has_table_blocks(slide)
 
-        if is_chart_slide and not is_table_slide:
+        if is_agenda_slide:
+            slide["template_slide_id"] = sixth_slide_id
+        elif is_chart_slide and not is_table_slide:
             # Single chart (no table) -> use single chart template
             slide["template_slide_id"] = fifth_slide_id
         elif is_chart_slide:
@@ -1278,12 +1293,14 @@ def run_end_to_end_demo(aspect_ratio: str = None):
     third_slide_id = slides_info[2]["slideId"] if len(slides_info) > 2 else first_slide_id  # Template slide index 2 (logo page)
     fourth_slide_id = slides_info[3]["slideId"] if len(slides_info) > 3 else first_slide_id  # Template slide index 3 (chart + table)
     fifth_slide_id = slides_info[4]["slideId"] if len(slides_info) > 4 else first_slide_id  # Template slide index 4 (single chart)
+    sixth_slide_id = slides_info[5]["slideId"] if len(slides_info) > 5 else first_slide_id  # Template slide index 5 (agenda)
     print(f"\n  Template slide IDs:")
     print(f"    - Slide 0 (table only): {first_slide_id}")
     print(f"    - Slide 1 (table + textbox): {second_slide_id}")
     print(f"    - Slide 2 (logo page): {third_slide_id}")
     print(f"    - Slide 3 (chart + table): {fourth_slide_id}")
     print(f"    - Slide 4 (single chart): {fifth_slide_id}")
+    print(f"    - Slide 5 (agenda): {sixth_slide_id}")
 
     # Step 3: Load demo data and update slide IDs
     print("\n[Step 3/4] Preparing slide data...")
@@ -1329,6 +1346,14 @@ def run_end_to_end_demo(aspect_ratio: str = None):
                             return True
         return False
 
+    def has_agenda_blocks(slide_data):
+        """Check if slide has agenda blocks"""
+        blocks = get_all_blocks(slide_data)
+        for block in blocks:
+            if block.get("type") == "agenda":
+                return True
+        return False
+
     def has_chart_blocks(slide_data):
         """Check if slide has chart blocks"""
         blocks = get_all_blocks(slide_data)
@@ -1348,11 +1373,15 @@ def run_end_to_end_demo(aspect_ratio: str = None):
     for i, slide in enumerate(deck_request["slides"]):
         blocks = get_all_blocks(slide)
         has_text_block = any(b.get("type") == "text" for b in blocks)
+        is_agenda_slide = has_agenda_blocks(slide)
         is_logo_slide = has_logo_cells(slide)
         is_chart_slide = has_chart_blocks(slide)
         is_table_slide = has_table_blocks(slide)
 
-        if is_chart_slide and not is_table_slide:
+        if is_agenda_slide:
+            slide["template_slide_id"] = sixth_slide_id  # Agenda template
+            print(f"    - Slide {i} (agenda) -> Template slide 5")
+        elif is_chart_slide and not is_table_slide:
             slide["template_slide_id"] = fifth_slide_id  # Single chart template
             print(f"    - Slide {i} (single chart) -> Template slide 4")
         elif is_chart_slide:
@@ -1389,6 +1418,7 @@ def run_end_to_end_demo(aspect_ratio: str = None):
     print(f"Status: {result.get('status', 'N/A')}")
 
     print("\nFeatures demonstrated:")
+    print("  - Agenda slides with section highlighting")
     print("  - Multi-slide generation with pagination")
     print("  - Conditional formatting (NPS, criticality, outlook)")
     print("  - Logo pages with automatic company logo fetching")
@@ -1454,13 +1484,13 @@ def demo_chart_update(generation_id: str, before_path: str = None, after_path: s
 
     updates = [
         {
-            "slide_index": 5,   # NPS chart slide (slide 4 in request -> slide 5 due to table pagination)
+            "slide_index": 7,   # NPS chart slide (agenda + table pagination shifts index)
             "chart_index": 0,   # First (only) chart on the slide
             "chart_data": new_chart_data
         }
     ]
 
-    print(f"  Target: slide_index=5, chart_index=0")
+    print(f"  Target: slide_index=7, chart_index=0")
     print(f"  Updating 3 series across 8 categories")
 
     result = update_charts(generation_id, updates, output_path=after_path)
@@ -1513,7 +1543,7 @@ def run_chart_update_from_file_demo(pptx_path: str) -> dict:
 
     updates = [
         {
-            "slide_index": 5,
+            "slide_index": 7,
             "chart_index": 0,
             "chart_data": {
                 "categories": [
@@ -1589,8 +1619,8 @@ if __name__ == "__main__":
     print(f"API Key: {'*' * 8}...{API_KEY[-4:] if len(API_KEY) > 4 else '****'}")
     print("\nIncluded files:")
     print("  - demo_data_fake.json: Sample deck with logo pages (inherits fonts)")
-    print("  - template_v3.pptx: Template with 5 slide layouts (16:9)")
-    print("  - template_v3_4by3.pptx: Template with 5 slide layouts (4:3)")
+    print("  - template_v3.pptx: Template with 6 slide layouts (16:9)")
+    print("  - template_v3_4by3.pptx: Template with 6 slide layouts (4:3)")
     print("  - README.md: Complete API documentation")
 
     # Prompt user for aspect ratio
